@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr-FR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Freloche</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/loader.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap5.3.min.css" />
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="assets/icons/papi.png" />
+
+    <script src="assets/js/bootstrap5.3.bundle.min.js"></script>
+    <script src="assets/js/all.min.js"></script>
+    <script src="assets/js/d3.min.js"></script>
+    <script src="assets/js/hex-lib.js"></script>
+    <script src="assets/js/hex-algorithms.js"></script>
+
+  </head>
+  <body>
+    <div id="ec" ></div>
+    <script src="assets/app.js" defer></script>
+    <!-- Register the app's service worker. -->
+    <script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("assets/sw.js").then(
+          (registration) => {
+            console.log("Service worker registration successful:", registration);
+          },
+          (error) => {
+            console.error(`Service worker registration failed: ${error}`);
+          },
+        );
+      } else {
+        console.error("Service workers are not supported.");
+      }
+    </script>
+
+<script type="module">
+    import carto from './assets/js/cartoHexa.js';
+    import * as points from './assets/js/cartoPoints.js';
+    import anime from './assets/js/anime.es.js';
+    import {auth} from './assets/js/auth.js';
+
+    /*récupère les data
+    */
+    let sources = {
+      'omk':[
+        {'id':2}
+      ],
+      /*
+      'octaviana': [
+        {'idCol':346},{'idCol':347},{'idCol':348},{'idCol':349},{'idCol':350},{'idCol':351},
+        {'idItem':6324}, {'idItem':6382}
+      ]
+      */
+    },
+    a = new auth({
+                mail:'samuel.szoniecky@univ-paris8.fr',
+                apiOmk:'../omk_creationsp8/api/',
+                ident: 'dgs91Ps3nMp42INkjLWoudBlChTHcQ9h',
+                key: 'zLBzJGoI76NLGxjX3aaX3fAjB4Ht6Gk9'
+            }),
+    carte = new carto.cartoHexa({'idCont':'ec','eventClickHexa':selectHexa}),
+    hexas = d3.selectAll(".gInit");
+    a.getUser(u=>getSources()); 
+
+    async function getSources(s=0,i=0){
+      if(s==0 && i==0)carte.wait.show();
+      let ts = Object.keys(sources);
+      await getSourceAleaTof(ts[s],sources[ts[s]][i]);
+      if(sources[ts[s]].length-1 > i) await getSources(s,i+1);
+      else if(ts.length-1 > s) await getSources(s+1,0);
+      else updateTofs();
+    }
+
+    async function updateTofs(){
+      //ajoute les photos dans chaque hexa
+      Promise.all(d3.range(hexas.size()).map(i=>getAleaTof())).then(tofs => {
+        hexas.selectAll('image').remove();
+        hexas.append("image")
+          .attr('href',(d,i)=>tofs[i])
+          .attr('x',"-50")
+          .attr('y',"-50")
+          .attr('height',"100")
+          .attr('width',"100");
+          carte.wait.hide(true);
+      });      
+    }
+
+    async function getAleaTof(){
+      let ts = Object.keys(sources), 
+        s = ts[d3.randomInt(0,ts.length-1)()],
+        i = sources[s][d3.randomInt(0,sources[s].length-1)()];
+        return await getSourceAleaTof(s,i);
+    }
+
+    async function getSourceAleaTof(s,i){
+      switch (s) {
+        case 'omk':
+          return await getAleaTofOmk(i);
+          break;      
+        case 'octaviana':
+          return await getAleaTofOctaviana(i);
+          break;      
+      }
+    }
+
+
+    function selectHexa(e,h){
+        console.log(h);
+        let hexa = d3.select(e.currentTarget);
+        hexa.select('image').remove();
+        getAleaTofOctaviana().then(urlTof => {
+          console.log(urlTof);
+          hexa.append("image")
+            .attr('href',urlTof)
+            .attr('x',"-50")
+            .attr('y',"-50")
+            .attr('height',"100")
+            .attr('width',"100");
+        });
+    }
+
+    async function getAleaTofOctaviana(octa){
+        //choisi une source octaviana
+        if(!octa.data){
+          let url = octa.idCol ? "octaviana.php?idCol="+octa.idCol : "octaviana.php?idItem="+octa.idItem;
+          octa.data= await d3.json(url);
+        }
+        if(octa.idCol){
+            //choisi un item
+            let itemCol = octa.data[d3.randomInt(0,octa.data.length-1)()],
+                itemFind = sources.octaviana.filter(o=>o.idItem==itemCol.id);
+            if(!itemFind.length){
+                octa = {'idItem':itemCol.id,'data':await d3.json("octaviana.php?idItem="+itemCol.id)};
+                sources.octaviana.push(octa);
+            }else{
+                octa = itemFind[0];
+            }
+        }
+        if(!octa.files)octa.files = await d3.json("octaviana.php?idFiles="+octa.data.id);
+        console.log(octa);
+        //choisi une photo
+        return octa.files[d3.randomInt(0,octa.files.length-1)()].file_urls.square_thumbnail;
+    }
+
+    async function getAleaTofOmk(item){
+        //choisi une source octaviana
+        if(!item.medias){
+          item = a.omk.getItem(item.id);
+          let m = await a.omk.getMedias(item);
+        }
+        console.log(item);
+        //choisi une photo
+        return item.medias[d3.randomInt(0,item.medias.length-1)()]["o:thumbnail_urls"].large;
+    }
+</script>
+
+</body>
+</html>
