@@ -81,6 +81,10 @@ class cartoHexa {
                 initData();
             } 
         };
+
+        this.getSize = function(){
+            return {'width':width,'height':height}
+        }
         
     function initData() {
         hierarchie = d3.hierarchy(me.data);

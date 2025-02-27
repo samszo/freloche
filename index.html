@@ -49,29 +49,67 @@
       'omk':[
         {'id':2}
       ],
-      /*
+      //
       'octaviana': [
         {'idCol':346},{'idCol':347},{'idCol':348},{'idCol':349},{'idCol':350},{'idCol':351},
         {'idItem':6324}, {'idItem':6382}
       ]
-      */
+      //
     },
-    a = new auth({
+    carte = new carto.cartoHexa({'idCont':'ec','eventClickHexa':selectHexa}),
+    hexas = d3.selectAll(".gInit");
+    moveHexa();
+    carte.wait.show();
+    let a = new auth({
                 mail:'samuel.szoniecky@univ-paris8.fr',
                 apiOmk:'../omk_creationsp8/api/',
                 ident: 'dgs91Ps3nMp42INkjLWoudBlChTHcQ9h',
                 key: 'zLBzJGoI76NLGxjX3aaX3fAjB4Ht6Gk9'
-            }),
-    carte = new carto.cartoHexa({'idCont':'ec','eventClickHexa':selectHexa}),
-    hexas = d3.selectAll(".gInit");
+            });
     a.getUser(u=>getSources()); 
 
+
+    function moveHexa(){
+      let size = carte.getSize();
+      //
+      d3.select("#svgCartoHexach0")
+      /*
+        .append("svg")
+          .style('position',"absolute")
+          .style('top',"-"+size.height/2+"px")
+          .style('left',"-"+size.width/4+"px")
+          .attr('width',size.width)
+          .attr('height',size.height)
+        //.attr('viewbox',"0 0 3000 800")
+      */
+        .append("path")
+          .attr('id','motionPath')
+          .attr("fill","none").attr("stroke","currentColor").attr("stroke-width","1")
+          //.attr("d","M8,56 C8,33.90861 25.90861,16 48,16 C70.09139,16 88,33.90861 88,56 C88,78.09139 105.90861,92 128,92 C150.09139,92 160,72 160,56 C160,40 148,24 128,24 C108,24 96,40 96,56 C96,72 105.90861,92 128,92 C154,93 168,78 168,56 C168,33.90861 185.90861,16 208,16 C230.09139,16 248,33.90861 248,56 C248,78.09139 230.09139,96 208,96 L48,96 C25.90861,96 8,78.09139 8,56 Z")
+          .attr("d",`m 2.7245418,0.91363655
+c 25.1200002,0 45.4500002,-20.32999955 45.4500002,-45.44999955 0,-25.120001 -20.33,-45.45 -45.4500002,-45.45 -50.2499998,0 -90.9099998,40.66 -90.9099998,90.90999955 0,50.24999845 40.66,90.90999845 90.9099998,90.90999845 75.3700002,0 136.3599982,-60.989998 136.3599982,-136.359998 0,-75.369997 -60.989998,-136.360007 -136.3599982,-136.360007 -100.4999998,0 -181.8200018,81.320007 -181.8200018,181.82000655 0,100.49999345 81.320002,181.81999345 181.8200018,181.81999345 125.6199982,0 227.2699982,-101.649995 227.2699982,-227.269993 0,-125.620007 -101.65,-227.300007 -227.2699982,-227.300007 -150.7500018,0 -272.7300018,121.98001 -272.7300018,272.73000655 0,150.74999345 121.98,272.72999345 272.7300018,272.72999345 175.8699982,0 318.1799982,-142.31 318.1799982,-318.179993 0,-175.870007 -142.31,-318.190007 -318.1799982,-318.190007 -200.9900018,0 -363.6399918,162.64 -363.6399918,363.64000655 0,200.99999345 162.63999,363.63999345 363.6399918,363.63999345 226.1199982,0 409.0899982,-182.97 409.0899982,-409.089993 0,-226.120007 -182.97,-409.100007 -409.0899982,-409.100007 -251.2400018,0 -454.5399918,203.3 -454.5399918,454.55000655 0,251.24999345 203.29999,454.54999345 454.5499918,454.54999345 276.3699982,0 499.9999982,-223.63 499.9999982,-499.999993 0,-276.370007 -223.63,-500.000007 -499.9999982,-500.000007`)
+          ;
+      //    
+      var path = anime.path('#motionPath');
+      anime({
+        targets: '#svgCartoHexach0',
+        translateX:path('x'),
+        translateY: path('y'),
+        //rotate: path('angle'),
+        easing: 'linear',
+        duration: 10000,
+        loop: true
+      });
+      //
+    }
+
+
     async function getSources(s=0,i=0){
-      if(s==0 && i==0)carte.wait.show();
       let ts = Object.keys(sources);
-      await getSourceAleaTof(ts[s],sources[ts[s]][i]);
-      if(sources[ts[s]].length-1 > i) await getSources(s,i+1);
-      else if(ts.length-1 > s) await getSources(s+1,0);
+      await getSource(ts[s],i);
+      //on ne précharge que omk
+      if(s==0 & sources[ts[s]].length-1 > i) await getSources(s,i+1);
+      else if(s==0 & ts.length-1 > s) await getSources(s+1,0);
       else updateTofs();
     }
 
@@ -89,24 +127,78 @@
       });      
     }
 
-    async function getAleaTof(){
-      let ts = Object.keys(sources), 
-        s = ts[d3.randomInt(0,ts.length-1)()],
-        i = sources[s][d3.randomInt(0,sources[s].length-1)()];
-        return await getSourceAleaTof(s,i);
-    }
-
-    async function getSourceAleaTof(s,i){
+    async function getSource(s,i){
       switch (s) {
         case 'omk':
-          return await getAleaTofOmk(i);
+          return sources[s][i] = await getOmk(sources[s][i]);
           break;      
         case 'octaviana':
-          return await getAleaTofOctaviana(i);
+          return sources[s][i] = await getOctaviana(sources[s][i]);
           break;      
       }
     }
 
+    async function getOctaviana(octa){
+        //récupère une source octaviana
+        let url = octa.idCol ? "octaviana.php?idCol="+octa.idCol : "octaviana.php?idItem="+octa.idItem;
+        octa.data= await d3.json(url);          
+        if(octa.idItem)octa.files = await d3.json("octaviana.php?idFiles="+octa.data.id);
+        //console.log(octa);
+        return octa;
+    }
+
+    async function getOmk(item){
+        item = a.omk.getItem(item.id);
+        let m = await a.omk.getMedias(item);
+        //console.log(item);
+        return item;
+    }
+
+    async function getAleaTof(){
+      let ts = Object.keys(sources), 
+        s = ts[d3.randomInt(ts.length)()],
+        i = sources[s][d3.randomInt(0,sources[s].length-1)()];
+        console.log(s);
+        switch (s) {
+          case 'omk':
+            return await getAleaTofOmk(i);
+            break;      
+          case 'octaviana':
+            return await getAleaTofOctaviana(i);
+            break;      
+        }
+    }
+
+    async function getAleaTofOctaviana(octa){
+        //choisi une source octaviana
+        if(!octa.data){
+          octa = await getOctaviana(octa);
+        }
+        if(octa.idCol){
+            //choisi un item
+            let itemCol = octa.data[d3.randomInt(0,octa.data.length-1)()],
+                itemFind = sources.octaviana.filter(o=>o.idItem==itemCol.id);
+            if(!itemFind.length){
+                octa = await getOctaviana({'idItem':itemCol.id});
+                sources.octaviana.push(octa);
+            }else{
+                octa = itemFind[0];
+            }
+        }
+        console.log(octa);
+        //choisi une photo
+        return octa.files[d3.randomInt(0,octa.files.length-1)()].file_urls.square_thumbnail;
+    }
+
+    async function getAleaTofOmk(item){
+        //choisi une source octaviana
+        if(!item.medias){
+          item = await getOmk(item);
+        }
+        console.log(item);
+        //choisi une photo
+        return item.medias[d3.randomInt(0,item.medias.length-1)()]["o:thumbnail_urls"].large;
+    }
 
     function selectHexa(e,h){
         console.log(h);
@@ -123,39 +215,6 @@
         });
     }
 
-    async function getAleaTofOctaviana(octa){
-        //choisi une source octaviana
-        if(!octa.data){
-          let url = octa.idCol ? "octaviana.php?idCol="+octa.idCol : "octaviana.php?idItem="+octa.idItem;
-          octa.data= await d3.json(url);
-        }
-        if(octa.idCol){
-            //choisi un item
-            let itemCol = octa.data[d3.randomInt(0,octa.data.length-1)()],
-                itemFind = sources.octaviana.filter(o=>o.idItem==itemCol.id);
-            if(!itemFind.length){
-                octa = {'idItem':itemCol.id,'data':await d3.json("octaviana.php?idItem="+itemCol.id)};
-                sources.octaviana.push(octa);
-            }else{
-                octa = itemFind[0];
-            }
-        }
-        if(!octa.files)octa.files = await d3.json("octaviana.php?idFiles="+octa.data.id);
-        console.log(octa);
-        //choisi une photo
-        return octa.files[d3.randomInt(0,octa.files.length-1)()].file_urls.square_thumbnail;
-    }
-
-    async function getAleaTofOmk(item){
-        //choisi une source octaviana
-        if(!item.medias){
-          item = a.omk.getItem(item.id);
-          let m = await a.omk.getMedias(item);
-        }
-        console.log(item);
-        //choisi une photo
-        return item.medias[d3.randomInt(0,item.medias.length-1)()]["o:thumbnail_urls"].large;
-    }
 </script>
 
 </body>

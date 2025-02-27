@@ -27,7 +27,7 @@ export class omk {
                 me.getClass(v);
             })
             me.setRT();
-            me.loader.hide(true);
+            me.loader.hide();
         }
         this.setRT = function (cb=false){
             me.rts = syncRequest(me.api+'resource_templates?per_page=1000');
@@ -246,7 +246,7 @@ export class omk {
             d3.json(url).then((data) => {
                 me.user = data.length ? data[0] : false;
                 //TODO: mieux gérer anythingLLM Login
-                me.user.anythingLLM = syncRequest(me.api.replace('api/','s/cours-bnf/page/ajax?json=1&helper=anythingLLMlogin'));
+                //me.user.anythingLLM = syncRequest(me.api.replace('api/','s/cours-bnf/page/ajax?json=1&helper=anythingLLMlogin'));
                 if(cb)cb(me.user);
             });
 
@@ -361,7 +361,7 @@ export class omk {
                 options.body=bodyData;
             }
             const response = await fetch(url.u, options);
-            me.loader.hide(true);
+            me.loader.hide();
             return response.json(); // parses JSON response into native JavaScript objects
         }        
 
@@ -369,7 +369,7 @@ export class omk {
             let url = me.api.replace('api','s')+q;
             me.loader.show();
             d3.json(url).then(json=>{
-                me.loader.hide(true);
+                me.loader.hide();
                 cb(json);
             });
             //cb(syncRequest(url));

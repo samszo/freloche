@@ -26,7 +26,7 @@ export class loader {
 
             };
             loading = main.select("#ws-loading");
-            me.hide(true);
+            me.hide();
         }
                 
         this.show = function(){
