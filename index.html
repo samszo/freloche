@@ -42,6 +42,8 @@
     import * as points from './assets/js/cartoPoints.js';
     import anime from './assets/js/anime.es.js';
     import {auth} from './assets/js/auth.js';
+    import {modal} from './assets/js/modal.js';
+    import {parole} from './assets/js/parole.js';
 
     /*récupère les data
     */
@@ -49,12 +51,12 @@
       'omk':[
         {'id':2}
       ],
-      //
+      /*
       'octaviana': [
         {'idCol':346},{'idCol':347},{'idCol':348},{'idCol':349},{'idCol':350},{'idCol':351},
         {'idItem':6324}, {'idItem':6382}
       ]
-      //
+      */
     },
     carte = new carto.cartoHexa({'idCont':'ec','eventClickHexa':selectHexa}),
     hexas = d3.selectAll(".gInit");
@@ -67,7 +69,6 @@
                 key: 'zLBzJGoI76NLGxjX3aaX3fAjB4Ht6Gk9'
             });
     a.getUser(u=>getSources()); 
-
 
     function moveHexa(){
       let size = carte.getSize();
@@ -225,17 +226,12 @@ z`)
 
     function selectHexa(e,h){
         console.log(h);
-        let hexa = d3.select(e.currentTarget);
-        hexa.select('image').remove();
-        getAleaTofOctaviana().then(urlTof => {
-          console.log(urlTof);
-          hexa.append("image")
-            .attr('href',urlTof)
-            .attr('x',"-50")
-            .attr('y',"-50")
-            .attr('height',"100")
-            .attr('width',"100");
-        });
+        let hexa = d3.select(e.currentTarget),
+          m=new modal({'size':'modal-lg'}),
+          mNote = m.add('modalAddComment');
+          mNote.m.show();
+        let p = new parole({'conteneur':mNote.s.select("#modParole"),'omk':a.omk});
+
     }
 
 </script>

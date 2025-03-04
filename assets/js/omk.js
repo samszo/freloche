@@ -252,7 +252,7 @@ export class omk {
 
         }
 
-        this.createItem = function (data, cb=false, verifDoublons){
+        this.createItem = function (data, cb=false, verifDoublons, file){
             if(verifDoublons){
                 let items = me.searchItems(verifDoublons);
                 if(items.length){
@@ -261,7 +261,7 @@ export class omk {
                 }
             }
             let url = me.api+'items?key_identity='+me.ident+'&key_credential='+me.key;
-            postData({'u':url,'m':'POST'}, me.formatData(data)).then((rs) => {
+            postData({'u':url,'m':'POST'}, me.formatData(data),file).then((rs) => {
                 me.items[rs['o:id']]=rs;
                 if(cb)cb(rs);
             });
