@@ -82,9 +82,13 @@ class cartoHexa {
             } 
         };
 
-        this.getSize = function(){
-            return {'width':width,'height':height}
-        }
+    this.getSize = function(){
+        return {'width':width,'height':height}
+    }
+
+    this.getLayoutBase = function(){
+        return layoutBase;
+    }
         
     function initData() {
         hierarchie = d3.hierarchy(me.data);
@@ -1043,6 +1047,10 @@ class cartoHexa {
     }
 
     //merci beaucoup à httpHexa://stackoverflow.com/questions/1734745/how-to-create-circle-with-b%C3%A9zier-curves    
+    this.hexaCircle = function(h){
+        return svgBezierCircle(h); 
+    }
+
     function svgBezierCircle(h) {
         p = d3.path();
         //rayon du cercle circonscrit de 2 hexa

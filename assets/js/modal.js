@@ -83,7 +83,10 @@ export let modalAddComment = `
         </div>
         <div class="modal-body text-bg-dark">
             <h4 id="inptTitreNote"></h4>
-            <div id="modParole" class="row mb-3"></div>    
+            <div id="modParole" class="row mb-3"></div> 
+            <div class="text-center">       
+                <img id="imgAddComment" src="" class="img-fluid" alt="Responsive image">
+            </div>                          
         </div>                          
         <div class="modal-footer text-bg-warning">
             <button id="btnAddCommentClose" type="button" class="btn btn-secondary">Fermer</button>        

@@ -51,16 +51,17 @@
       'omk':[
         {'id':2}
       ],
-      /*
+      //
       'octaviana': [
         {'idCol':346},{'idCol':347},{'idCol':348},{'idCol':349},{'idCol':350},{'idCol':351},
         {'idItem':6324}, {'idItem':6382}
       ]
-      */
+      //
     },
     carte = new carto.cartoHexa({'idCont':'ec','eventClickHexa':selectHexa}),
     hexas = d3.selectAll(".gInit");
     moveHexa();
+    //addFreloche();
     carte.wait.show();
     let a = new auth({
                 mail:'samuel.szoniecky@univ-paris8.fr',
@@ -69,6 +70,23 @@
                 key: 'zLBzJGoI76NLGxjX3aaX3fAjB4Ht6Gk9'
             });
     a.getUser(u=>getSources()); 
+
+    function addFreloche(){
+      let size = carte.getSize();
+        path = carte.hexaCircle();
+      //
+      d3.select("#svgCartoHexach0")
+        .append("circle")
+            .attr('id','bordFreloche')
+            .attr('cx',size.width/2)
+            .attr('cy',size.height/2)
+            .attr('r',size.width/2)
+            .attr("fill","none")
+            .attr("stroke","white")
+            .attr("stroke-width","10");
+
+    }
+
 
     function moveHexa(){
       let size = carte.getSize();
@@ -142,7 +160,10 @@ z`)
       Promise.all(d3.range(hexas.size()).map(i=>getAleaTof())).then(tofs => {
         hexas.selectAll('image').remove();
         hexas.append("image")
-          .attr('href',(d,i)=>tofs[i])
+          .attr('href',(d,i)=>{
+            d.tof = tofs[i]; 
+            return d.tof.image;
+          })
           .attr('x',"-50")
           .attr('y',"-50")
           .attr('height',"100")
@@ -211,7 +232,9 @@ z`)
         }
         console.log(octa);
         //choisi une photo
-        return octa.files[d3.randomInt(0,octa.files.length-1)()].file_urls.square_thumbnail;
+        let tof = octa.files[d3.randomInt(0,octa.files.length-1)()];
+        tof.image = tof.file_urls.fullsize; 
+        return tof;
     }
 
     async function getAleaTofOmk(item){
@@ -221,7 +244,9 @@ z`)
         }
         console.log(item);
         //choisi une photo
-        return item.medias[d3.randomInt(0,item.medias.length-1)()]["o:thumbnail_urls"].large;
+        let tof = item.medias[d3.randomInt(0,item.medias.length-1)()];
+        tof.image = tof["o:thumbnail_urls"].large;
+        return tof;
     }
 
     function selectHexa(e,h){
@@ -230,6 +255,7 @@ z`)
           m=new modal({'size':'modal-lg'}),
           mNote = m.add('modalAddComment');
           mNote.m.show();
+        mNote.s.select("#imgAddComment").attr("src",h.tof.image);  
         let p = new parole({'conteneur':mNote.s.select("#modParole"),'omk':a.omk});
 
     }
