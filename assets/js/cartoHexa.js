@@ -335,7 +335,8 @@ class cartoHexa {
                 .attr('transform',h=>hexCenter(h,layoutBase).transform)
                 .on(me.eventCreate,me.eventClickHexa ? me.eventClickHexa : addNewEspace)
                 .append('polygon').attr('points',polygonVerticesFlat)
-                .attr('fill',defColor).attr('stroke','#a8acaf')                
+                .attr('class','hexaInitGrille')
+                //.attr('fill',defColor).attr('stroke','#a8acaf')                
             ,
             update => update
                 .attr('id',(h,i)=>{

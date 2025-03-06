@@ -17,6 +17,27 @@
     <script src="assets/js/hex-lib.js"></script>
     <script src="assets/js/hex-algorithms.js"></script>
 
+    <style>
+      .hexaInitGrille{
+        fill:none;
+        stroke:white;
+        stroke-width:5px;
+      }
+      .mancheFreloche{
+        fill: none;
+        stroke: #71460e;
+        stroke-width: 30px;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: none;
+      }
+      .bordFreloche{
+        fill: none;
+        stroke: #71460e;
+        stroke-width: 30px;
+      }
+    </style>
+
   </head>
   <body>
     <div id="ec" ></div>
@@ -60,8 +81,9 @@
     },
     carte = new carto.cartoHexa({'idCont':'ec','eventClickHexa':selectHexa}),
     hexas = d3.selectAll(".gInit");
-    moveHexa();
-    //addFreloche();
+    addFreloche();
+    addPapillons();
+    //moveHexa();
     carte.wait.show();
     let a = new auth({
                 mail:'samuel.szoniecky@univ-paris8.fr',
@@ -71,20 +93,40 @@
             });
     a.getUser(u=>getSources()); 
 
-    function addFreloche(){
-      let size = carte.getSize();
-        path = carte.hexaCircle();
-      //
-      d3.select("#svgCartoHexach0")
-        .append("circle")
-            .attr('id','bordFreloche')
-            .attr('cx',size.width/2)
-            .attr('cy',size.height/2)
-            .attr('r',size.width/2)
-            .attr("fill","none")
-            .attr("stroke","white")
-            .attr("stroke-width","10");
+    function addPapillon(){
 
+      
+
+    }
+
+    function addFreloche(){
+      let size = carte.getSize(),
+        gCarte = d3.select("#svgCartoHexach0").select("g"),
+        centerX = size.width / 2,
+        centerY = size.height / 2;
+      //ajoute le filet
+      gCarte.append("ellipse")
+            .attr('class','bordFreloche')
+            .attr('cx',centerX)
+            .attr('cy',centerY)
+            .attr('rx',centerY)
+            .attr("ry",centerY);
+      //ajoute le manche
+      let posiManche = document.getElementById("ch0_hexa_0_2_0_-2").getBoundingClientRect(),
+        longManche = 800,
+        x1 = posiManche.x+posiManche.width,
+        y1 = posiManche.y+posiManche.height/2,
+        dx = x1 - centerX,
+        dy = y1 - centerY,
+        angle = Math.atan2(dy, dx),
+        perpenX = x1 - longManche * Math.cos(angle + Math.PI),
+        perpenY = y1 - longManche * Math.sin(angle + Math.PI);
+        gCarte.append("line")
+          .attr("class", "mancheFreloche")
+          .attr('x1', x1)
+          .attr('y1', y1)
+          .attr('x2', perpenX)
+          .attr('y2', perpenY);
     }
 
 
@@ -167,7 +209,8 @@ z`)
           .attr('x',"-50")
           .attr('y',"-50")
           .attr('height',"100")
-          .attr('width',"100");
+          .attr('width',"100")
+          .style("cursor","zoom-in");
           carte.wait.hide(true);
       });      
     }
