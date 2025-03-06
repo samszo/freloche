@@ -36,6 +36,11 @@
         stroke: #71460e;
         stroke-width: 30px;
       }
+      .chaoticumPapillonae{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+      }
     </style>
 
   </head>
@@ -65,6 +70,7 @@
     import {auth} from './assets/js/auth.js';
     import {modal} from './assets/js/modal.js';
     import {parole} from './assets/js/parole.js';
+    import {chaoticumPapillonae} from './assets/js/chaoticumPapillonae.js';
 
     /*récupère les data
     */
@@ -81,8 +87,8 @@
     },
     carte = new carto.cartoHexa({'idCont':'ec','eventClickHexa':selectHexa}),
     hexas = d3.selectAll(".gInit");
-    addFreloche();
     addPapillons();
+    addFreloche();
     //moveHexa();
     carte.wait.show();
     let a = new auth({
@@ -93,10 +99,52 @@
             });
     a.getUser(u=>getSources()); 
 
-    function addPapillon(){
+    function addPapillons(){
+      let size = carte.getSize(),
+        jardin = d3.select("#divCartoch0");
+      for (let index = 0; index < 10; index++) {
+        let idPapi = 'cp' + index,//+Date.now(),
+        papi = new chaoticumPapillonae({
+            'cont': jardin,
+            "id":idPapi,
+            'height':size.height/6,
+            'width':size.width/6,
+            'scaleColors':d3.scaleSequential(d3.interpolateRainbow),
+            /* cf. https://d3js.org/d3-scale-chromatic
+            d3.scaleSequential(d3.interpolateYlOrRd)
+            d3.scaleSequential(d3.interpolateMagma)
+            d3.scaleSequential(d3.interpolateBlues)
+            d3.scaleOrdinal(d3.schemeAccent)
+            d3.scaleSequential(d3.interpolateRainbow)
+            d3.scaleSequential(d3.interpolatePiYG)
+            */
+            "modelesWing": [
+              "assets/svg/papiAile.svg",
+              "assets/svg/papiAile1.svg"
+            ]
+        });
+        bougePapi(idPapi);   
+      }
+    }
 
-      
-
+    function bougePapi(idPapi){
+      let size = carte.getSize();
+      anime({
+        targets: '#'+idPapi,
+        translateX: function() {
+          return anime.random(0, size.width-size.height/6);
+        },
+        translateY: function() {
+          return anime.random(0, size.height-size.height/6);
+        },
+        easing: 'easeInOutQuad',
+        duration: function(){
+          return anime.random(3000, 6000);
+        },
+        complete: function() {
+          bougePapi(idPapi);
+        }
+      });
     }
 
     function addFreloche(){
