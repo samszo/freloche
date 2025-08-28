@@ -1,0 +1,84 @@
+<a
+    href="zotero://open-pdf/library/items/3P9A4XG5?page=6&annotation=97FX9UDE">825b1c6c16bd75748cbaf55e307a93ea68bcedbb.pdf(annotation)</a>
+
+<!--
+pdftoppm -f 5 -l 6 -png -x 203.012 -y 68.696 -W 669.262 -H 585.571 hypermedia.pdf > hyp5.png        
+-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+<canvas id="imageCanvas"></canvas>
+<canvas id="the-canvas"></canvas>
+
+<script>
+
+    // Load the PDF and render the specified annotation rectangle to the canvas
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
+    //https://api.zotero.org/users/13594/items/97FX9UDE
+    extractAnnotationImage();
+
+//http://localhost/omk_creationsp8/api/media/49
+
+
+    async function extractAnnotationImage() {
+        const url = 'files/825b1c6c16bd75748cbaf55e307a93ea68bcedbb.pdf';
+        const annotation = {
+            page: 6,
+            rect: [203.012, 68.696, 669.262, 585.571],
+            text: 'This is an example annotation text.'
+        };
+        pdfjsLib.getDocument(url).promise.then(async pdf => {
+            const page = await pdf.getPage(annotation.page);
+            renderAnnotationImage(page, annotation.rect);
+        }).catch(error => {
+            console.error('Error loading PDF:', error);
+        });
+    }
+
+    async function logArgs(page) {
+        const operatorList = await page.getOperatorList();
+        operatorList.fnArray.forEach((fn, i) => {
+
+            if (fn === pdfjsLib.OPS.constructPath) {
+                const args = operatorList.argsArray[i];
+                console.log(args)
+            }
+        });
+    }   
+
+    async function renderAnnotationImage(p,r) {
+                let s = 1
+                    , o = ru(r, p.getViewport({
+                        scale: s
+                    }))
+                let l = p.getViewport({
+                    scale: s,
+                    offsetX: -o[0],
+                    offsetY: -o[1]
+                });
+                let u = o[2] - o[0]
+                  , c = o[3] - o[1]
+                  , d = document.getElementById('the-canvas')
+                  , h = d.getContext("2d", {alpha:false});
+                d.width = u;
+                d.height = c;
+                d.style.width = u + "px";
+                d.style.height = c + "px";
+                let pro = {
+                    canvasContext: h,
+                    viewport: l
+                };
+                await p.render(pro).promise;
+                let f = d.toDataURL("image/png", 1);
+                const img = document.createElement('img');
+                img.src = f;
+                //img.alt = `Page ${annotation.page} PNG`;
+                document.body.appendChild(img);                
+    }
+    function ru(e,t) {
+        let[n,r] = t.convertToViewportPoint(e[0], e[1])
+            , [i,o] = t.convertToViewportPoint(e[2], e[3]);
+        return [Math.min(n, i), Math.min(o, r), Math.max(n, i), Math.max(o, r)]
+    }
+
+</script>

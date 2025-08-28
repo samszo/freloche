@@ -16,6 +16,8 @@
     <script src="assets/js/d3.min.js"></script>
     <script src="assets/js/hex-lib.js"></script>
     <script src="assets/js/hex-algorithms.js"></script>
+    <script src="assets/js/zotero-api-client.js"></script>
+
 
     <style>
       .hexaInitGrille{
@@ -71,6 +73,11 @@
     import {modal} from './assets/js/modal.js';
     import {parole} from './assets/js/parole.js';
     import {chaoticumPapillonae} from './assets/js/chaoticumPapillonae.js';
+ 
+    const { default: apiZot } = ZoteroApiClient;
+
+    //récupère les items de la collection
+    const response = await apiZot().library('user', 13594).collections('CJYT4NSF').items().get();
 
     /*récupère les data
     */

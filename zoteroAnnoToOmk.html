@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Annotations Zotero depuis Omeka S</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Annotations Zotero depuis un média Omeka S</h1>
+    <form id="mediaForm" class="mb-4">
+        <div class="mb-3">
+            <label for="mediaUrl" class="form-label">URL du média Omeka S</label>
+            <input type="url" class="form-control" id="mediaUrl" placeholder="https://votre-omeka-s/api/media/123">
+        </div>
+        <button type="submit" class="btn btn-primary">Récupérer les annotations</button>
+    </form>
+    <div id="annotationsResult"></div>
+</div>
+
+<!-- Bootstrap JS Bundle CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.getElementById('mediaForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const url = document.getElementById('mediaUrl').value;
+    const resultDiv = document.getElementById('annotationsResult');
+    resultDiv.innerHTML = '<div class="spinner-border" role="status"><span class="visually-hidden">Chargement...</span></div>';
+
+    try {
+        const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        if (!response.ok) throw new Error('Erreur lors de la récupération du média');
+        const media = await response.json();
+
+        // Supposons que les annotations Zotero sont stockées dans media['o:annotation'] ou media['zotero:annotations']
+        const annotations = media['zotero:annotations'] || media['o:annotation'] || [];
+
+        if (annotations.length === 0) {
+            resultDiv.innerHTML = '<div class="alert alert-warning">Aucune annotation Zotero trouvée.</div>';
+            return;
+        }
+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
+        let html = '<ul class="list-group">';
+        annotations.forEach((anno, idx) => {
+            html += `<li class="list-group-item">
+                <strong>Annotation ${idx + 1} :</strong><br>
+                ${typeof anno === 'string' ? anno : JSON.stringify(anno)}
+            </li>`;
+        });
+        html += '</ul>';
+        resultDiv.innerHTML = html;
+    } catch (err) {
+        resultDiv.innerHTML = `<div class="alert alert-danger">${err.message}</div>`;
+    }
+});
+</script>
+</body>
+</html>
