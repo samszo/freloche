@@ -43,6 +43,13 @@
         left: 0px;
         top: 0px;
       }
+      #ec{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+      }
     </style>
 
   </head>
@@ -329,9 +336,9 @@ z`)
             }
         }
         console.log(octa);
-        //choisi une photo
-        let tof = octa.files[d3.randomInt(0,octa.files.length-1)()];
-        tof.image = tof.file_urls.fullsize; 
+        //choisi une photo data[0].thumbnail_display_urls.medium
+        let tof = octa.data[d3.randomInt(0,octa.data.length-1)()];
+        tof.image = tof.thumbnail_display_urls.medium; 
         return tof;
     }
 
@@ -343,7 +350,7 @@ z`)
         console.log(item);
         //choisi une photo
         let tof = item.medias[d3.randomInt(0,item.medias.length-1)()];
-        tof.image = tof["o:thumbnail_urls"].large;
+        tof.image = tof["o:thumbnail_urls"] ? tof["o:thumbnail_urls"].large : "assets/icons/no-image.png";
         return tof;
     }
 
