@@ -7,7 +7,7 @@ export class Start extends Phaser.Scene {
     create() {
         // this.background = this.add.tileSprite(640, 360, 1280, 720, 'background');
 
-        // const logo = this.add.image(640, 200, 'logo');
+        //const logo = this.add.image(640, 200, 'logo');
 
         // const ship = this.add.sprite(640, 360, 'ship');
 
@@ -20,14 +20,16 @@ export class Start extends Phaser.Scene {
 
         // ship.play('fly');
 
-        // this.tweens.add({
-        //     targets: logo,
-        //     y: 400,
-        //     duration: 1500,
-        //     ease: 'Sine.inOut',
-        //     yoyo: true,
-        //     loop: -1
-        // });
+        /*
+        this.tweens.add({
+             targets: logo,
+             y: 400,
+             duration: 1500,
+             ease: 'Sine.inOut',
+             yoyo: true,
+             loop: -1
+        });
+        */
     }
 
     update() {

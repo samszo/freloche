@@ -5,12 +5,12 @@ export default {
     //         args: ['assets/sound.mp3', 'assets/sound.m4a', 'assets/sound.ogg']
     //     },
     // },
-    // 'image': {
-    //     spikes: {
-    //         key: 'spikes',
-    //         args: ['assets/spikes.png']
-    //     },
-    // },
+    'image': {
+         logo: {
+             key: 'logo',
+             args: ['assets/logo-paragraphe-blanc.png']
+         },
+    },
     'spritesheet': {
         ships: {
             key: 'ships',

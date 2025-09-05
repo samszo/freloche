@@ -58,6 +58,9 @@ export class Game extends Phaser.Scene {
     }
 
     initGameUi() {
+        //Create Logo
+        this.add.image(this.centreX, this.centreY, ASSETS.image.logo);
+
         // Create tutorial text
         this.tutorialText = this.add.text(this.centreX, this.centreY, 'Tap to shoot!', {
             fontFamily: 'Arial Black', fontSize: 42, color: '#ffffff',
