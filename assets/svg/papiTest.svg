@@ -1,0 +1,158 @@
+<svg id="svgCartoHexach0" width="1079" height="882">
+    <g transform="translate(-93,-22) scale(1)"><svg id="ch0svgE"
+            viewBox="-400 -433.0127018922193 800 866.0254037844386">
+            <defs>
+                <marker id="arrow" viewBox="0,0,20,20" refX="10" refY="10" markerWidth="20" markerHeight="20"
+                    orient="auto-start-reverse">
+                    <path d="M0,0L0,20L20,10" fill="#ffffff32"></path>
+                </marker>
+                <marker id="point" viewBox="0,0,20,20" refX="10" refY="10" markerWidth="20" markerHeight="20"
+                    orient="auto">
+                    <circle r="5" cx="10" cy="10" fill="#ffffff32"></circle>
+                </marker>
+            </defs>
+            <g class="gInit" id="ch0_hexa_0_-2_0_2" transform="translate(-300,-173.20508075688772)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image
+                    href="https://paris8-omekas.s3.nl-ams.scw.cloud/asset/3357c8288a243b55425ef447626129fc2e2ca606.png"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_-2_1_1" transform="translate(-300,0)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_-2_2_0" transform="translate(-300,173.20508075688772)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_-1_-1_2" transform="translate(-150,-259.8076211353316)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image
+                    href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/522880318e0e87c4d19e29bd3773a4c131bc1216.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_-1_0_1" transform="translate(-150,-86.60254037844386)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_-1_1_0" transform="translate(-150,86.60254037844386)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image
+                    href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/85efab29b66ac0c424e999e5efa627b6ae90a286.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_-1_2_-1" transform="translate(-150,259.8076211353316)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_0_-2_2" transform="translate(0,-346.41016151377545)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_0_-1_1" transform="translate(0,-173.20508075688772)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image
+                    href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/a4502346e55394ac87b84b3dbba9a89f87b8c58a.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gOccupe" id="ch0_hexa_0_0_0_0" transform="translate(0,0)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <g class="gTitre" transform="translate(0,0)"><text id="chText_ch0_hexa_0_0_0_0" text-anchor="middle"
+                        alignment-baseline="middle" fill="white" font-size="Infinityem"></text></g>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_0_1_-1" transform="translate(0,173.20508075688772)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_0_2_-2" transform="translate(0,346.41016151377545)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_1_-2_1" transform="translate(150,-259.8076211353316)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_1_-1_0" transform="translate(150,-86.60254037844386)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_1_0_-1" transform="translate(150,86.60254037844386)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_1_1_-2" transform="translate(150,259.8076211353316)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image
+                    href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/ed0a24671657905b1368d0eb91d4f4b9f580d713.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_2_-2_0" transform="translate(300,-173.20508075688772)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_2_-1_-1" transform="translate(300,0)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+            <g class="gInit" id="ch0_hexa_0_2_0_-2" transform="translate(300,173.20508075688772)">
+                <polygon
+                    points="100,0 50.000000000000014,-86.60254037844386 -49.99999999999998,-86.60254037844388 -100,-1.2246467991473532e-14 -50.00000000000004,86.60254037844383 50.000000000000014,86.60254037844386"
+                    class="hexaInitGrille"></polygon>
+                <image
+                    href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/8afc1c693af3fce3f179a0234992bfb02b9684cd.jpg"
+                    x="-50" y="-50" height="100" width="100" style="cursor: zoom-in;"></image>
+            </g>
+        </svg>
+        <ellipse class="bordFreloche" cx="539.5" cy="441" rx="441" ry="441"></ellipse>
+        <line class="mancheFreloche" x1="946.8783569335938" y1="617.3999938964844" x2="1681.008711320009"
+            y2="935.2877457342615"></line>
+    </g>
+</svg>

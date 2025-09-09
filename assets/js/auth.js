@@ -6,7 +6,7 @@ export class auth {
         var me = this;
         this.modal;
         this.m;
-        this.navbar = params.navbar ? params.navbar : d3.select('#navbarMain');
+        this.navbar = params.navbar ? params.navbar : false;
         this.apiOmk = params.apiOmk ? params.apiOmk : false; 
         this.mail = params.mail ? params.mail : false;
         this.ident = params.ident ? params.ident : false;
@@ -22,6 +22,14 @@ export class auth {
             btnLogin, nameLogin, alertAuth, alertMail, alertServer, alertUnknown, alertGitHub;
                 
         this.init = function () {
+            if(me.apiOmk){
+                me.apiOmk += me.apiOmk.slice(-1)=='/' ? "" : "/";
+                me.omk = new omk({'api':me.apiOmk});
+                if(me.navbar)createNavBar();
+                else me.getUser();
+            }                                                                                 
+        }
+        function createNavBar(){
             //création des éléments html
             let htmlNavBar = `<div class="btn-group">
                     <div class="mt-2">User : <span id="userLogin">Anonymous</span></div>                                        
@@ -168,7 +176,7 @@ export class auth {
             });                                                                                    
             me.m.select("#btnCheck").on('click',e=>{
                 me.getUser(null);
-            });                                                                                    
+            });                 
         }
         async function getGitHubAuth(){
             // Compare: https://docs.github.com/en/rest/reference/users#get-the-authenticated-user
@@ -196,16 +204,20 @@ export class auth {
                         me.omk = false;                                                                     
                     }else {
                         me.user = u;
-                        me.userAdmin = me.user["o:role"] == 'global_admin';            
-                        nameLogin.html(me.user['o:name']);
-                        btnLogin.attr('class','btn btn-danger').html(iconOut);                        
+                        me.userAdmin = me.user["o:role"] == 'global_admin';
                         me.user.id=me.user['o:id'];
-                        me.modal.hide();
+                        if(me.navbar){
+                            nameLogin.html(me.user['o:name']);
+                            btnLogin.attr('class','btn btn-danger').html(iconOut);                        
+                            me.modal.hide();
+                        }            
                     }
-                    authGitHub(uGitHub=>{
-                        me.user.loginGitHub=uGitHub;
-                        if(cb)cb(me.user);
-                    })
+                    if( me.keyGitHub){
+                        authGitHub(uGitHub=>{
+                            me.user.loginGitHub=uGitHub;
+                            if(cb)cb(me.user);
+                        })
+                    }
                 })    
             };
         }

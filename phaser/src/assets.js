@@ -5,10 +5,26 @@ export default {
     //         args: ['assets/sound.mp3', 'assets/sound.m4a', 'assets/sound.ogg']
     //     },
     // },
-    'image': {
+    'json': {
+         programmes: {
+             key: 'programmes',
+             url: 'http://localhost/omk_creationsp8/files/bulk_export/programme_de_l_universite_json-20250908-054909.table.json',
+             args: {scale:0.2}
+         },
+    },
+    'svg': {
+         freloche: {
+             key: 'freloche',
+             args: ['assets/freloche.svg',{scale:0.2}]
+         },
          logo: {
              key: 'logo',
-             args: ['assets/logo-paragraphe-blanc.png']
+             args: ['assets/logo-paragraphe-blanc.svg',{scale:0.5}]
+         },
+         papi: {
+             key: 'papi',
+             nb: 12,
+             args: {scale:0.8}
          },
     },
     'spritesheet': {

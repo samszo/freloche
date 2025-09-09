@@ -9,7 +9,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     health = 1;
 
     constructor(scene, x, y, shipId) {
-        super(scene, x, y, ASSETS.spritesheet.ships.key, shipId);
+        //super(scene, x, y, ASSETS.spritesheet.ships.key, shipId);
+        super(scene, x, y, 'freloche');
 
         scene.add.existing(this);
         scene.physics.add.existing(this);

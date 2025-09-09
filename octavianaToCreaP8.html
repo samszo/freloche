@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Octaviana to Creation P8</title>
+
+    <link href="assets/css/handsontable.full.min.css" rel="stylesheet">
+
+    <script src="assets/js/handsontable.full.min.js"></script>
+    <script src="assets/js/d3.min.js"></script>
+    <style>
+
+        td {
+            vertical-align: top;
+        }
+        .rGrid {
+            height:200px;
+            overflow: scroll;
+        }
+        .grid {
+            height:300px;
+            width:300px;
+        }
+    </style>
+</head>
+<body>
+    <table border="1" style="width: 100%;">
+        <tr>
+            <th>Octaviana</th>
+            <th>Creation Paris 8</th>
+        </tr>
+        <tr>
+            <td >
+                <div>
+                    <label for="fileOctaviana" class="btn">Charger le csv d'Octaviana</label>
+                    <input type="file" id="fileOctaviana" accept=".csv" >
+                    <button id="importgridOctaviana">Importer</button>
+                </div>
+                <div id="gridOctaviana" class="grid"></div>
+            </td>
+            <td >
+                <div>
+                    <button id="importgridCreaP8">Exporter</button>
+                </div>
+                <div id="gridCreaP8"  class="grid"></div>
+            </td>
+        </tr>
+    </table>
+    
+    <script type="module">
+        import {auth} from './assets/js/auth.js';
+
+        let a = new auth({
+            mail:'samuel.szoniecky@univ-paris8.fr',
+            apiOmk:'../omk_creationsp8/api/',
+            ident: 'dgs91Ps3nMp42INkjLWoudBlChTHcQ9h',
+            key: 'zLBzJGoI76NLGxjX3aaX3fAjB4Ht6Gk9'
+        }),
+        dataOctaviana = [],finCharge;
+
+        //chargement automatique des exemples
+        Promise.all([d3.csv("assets/data/octaviana.fr-items-20250907-050022.csv")]).then(values => {
+            dataOctaviana = values[0];
+            showGrid("gridOctaviana",values[0]);
+            finCharge = true;
+        });
+        //
+            
+        document.querySelector('#fileOctaviana').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const contents = e.target.result;
+                    ecsMaq = d3.csvParse(contents);
+                    showGrid("gridOctaviana",ecsMaq);
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        d3.select('#importgridOctaviana').on('click', function(){
+            if(dataOctaviana.length)importToOmk(1039);
+            else alert("Il n'y a pas de données récupérées d'Octaviana");
+        })
+
+        function showGrid(idCont, rows){
+            let headers = Object.keys(rows[0]), 
+                hotCours = new Handsontable(d3.select('#'+idCont).node(), {
+                className: 'htDark',
+                afterGetColHeader: function(col, TH){
+                    TH.className = 'darkTH'
+                },
+                colHeaders: true,
+                rowHeaders: true,
+                data:rows,
+                colHeaders: headers,
+                height: '400px',
+                autoWrapRow: true,
+                autoWrapCol: true,
+                manualColumnResize: true,
+                width:'100%',
+                stretchH: 'last',
+                licenseKey: 'non-commercial-and-evaluation',
+                customBorders: true,
+                dropdownMenu: true,
+                multiColumnSorting: true,
+                filters: true,
+                columns: getCellEditor(headers),
+                allowInsertColumn: false,
+                copyPaste: false,
+                search: true,
+                selectionMode: 'single', // 'single', 'range' or 'multiple',
+                afterSelection: (row, column, row2, column2, preventScrolling, selectionLayerLevel) => {
+                    let lib = hotCours.getDataAtCell(row,2),
+                        code = hotCours.getDataAtCell(row,1);
+                    console.log(code+" : "+lib);
+                    showSemaECRomeComp(code,lib);
+                    preventScrolling.value = true;
+                }                        
+            });
+            /*
+            const exportPlugin = hotCours.getPlugin('exportFile');
+            document.querySelector('#export'+idCont).addEventListener('click', () => {
+                exportPlugin.downloadFile('csv', {
+                    bom: false,
+                    columnDelimiter: ',',
+                    columnHeaders: true,
+                    exportHiddenColumns: true,
+                    exportHiddenRows: true,
+                    fileExtension: 'csv',
+                    filename: idCont+'_[YYYY]-[MM]-[DD]',
+                    mimeType: 'text/csv',
+                    rowDelimiter: '\r\n',
+                    rowHeaders: true,
+                });
+            });
+            */   
+        }        
+
+        function getCellEditor(cols){
+            let editors = [];
+            cols.forEach((h,i)=>{
+                switch (h) {
+                    case 'choix':
+                        editors.push({data:h, type: 'checkbox'})                          
+                        break;
+                    case 'code':
+                        editors.push({data:h, readOnly: true})                  
+                        break;                    
+                    case 'date':
+                        editors.push({data:h, type:'date'})                  
+                        break;                    
+                    default:
+                        /*
+                        if(h.substring(0, 4)=="cor-")editors.push({data:h, type: 'text'}) 
+                        else editors.push({data:h, readOnly: true})
+                        */                 
+                        if(i<=3)editors.push({data:h, type: 'text'}); 
+                        else editors.push({data:h, type: 'numeric'});
+                        break;
+                }
+            })
+            return editors;
+        }
+
+        
+        async function importToOmk(i=0){
+            console.log("Import "+(i+1)+" / "+dataOctaviana.length);
+            let d = dataOctaviana[i],
+                url = "octaviana.php?idItem="+d.Url.replace("https://octaviana.fr/s/octaviana/item/",""),
+                item = await d3.json(url),
+                dt = {'rt':'Programme de cours','c':'fup8:ProgrammeCours',
+                    'dt':{'dcterms:title':d.Titre,
+                        'dcterms:description':item['dcterms:description'] ? item['dcterms:description'][0]['@value'] : "",
+                        'dcterms:isReferencedBy':d.Url,
+                        'dcterms:subject':d.Sujet,
+                        'dcterms:date':d.Date,
+                        "o:media":item.thumbnail_display_urls.large,
+                        "bibo:content":item['extracttext:extracted_text'][0]['@value'],
+                        //"o:item_set":await getItemSet(d)                                                 
+                    },
+                    'verif':{'dcterms:isReferencedBy':d.Url},
+                    'index':d.Url
+                },
+                omk = await a.omk.getsetResource(dt);
+                console.log(omk);
+            if(i<dataOctaviana.length-1){
+                importToOmk(i+1);
+            }
+        }
+
+
+    </script>
+
+</body>
+</html>

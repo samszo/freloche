@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="svgCartoHexach0"
+   width="1603.4691"
+   height="964.05267"
+   version="1.1"
+   sodipodi:docname="freloche.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs19">
+    <defs
+       id="defs1">
+      <marker
+         id="arrow"
+         viewBox="0 0 20 20"
+         refX="10"
+         refY="10"
+         markerWidth="20"
+         markerHeight="20"
+         orient="auto-start-reverse">
+        <path
+           d="M 0,0 V 20 L 20,10"
+           fill="#ffffff32"
+           id="path1" />
+      </marker>
+      <marker
+         id="point"
+         viewBox="0 0 20 20"
+         refX="10"
+         refY="10"
+         markerWidth="20"
+         markerHeight="20"
+         orient="auto">
+        <circle
+           r="5"
+           cx="10"
+           cy="10"
+           fill="#ffffff32"
+           id="circle1" />
+      </marker>
+    </defs>
+  </defs>
+  <sodipodi:namedview
+     id="namedview19"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#ffffff"
+     inkscape:zoom="0.58123268"
+     inkscape:cx="743.24796"
+     inkscape:cy="673.56846"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svgCartoHexach0" />
+  <g
+     id="g20"
+     transform="matrix(0.61667618,0,0,0.61667618,-187.14087,27.022867)">
+    <g
+       class="gInit"
+       id="ch0_hexa_0_-2_0_2"
+       transform="matrix(1.5909444,0,0,1.5909444,567.04885,413.33947)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon1"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="https://paris8-omekas.s3.nl-ams.scw.cloud/asset/3357c8288a243b55425ef447626129fc2e2ca606.png"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image1" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_-2_1_1"
+       transform="matrix(1.5909444,0,0,1.5909444,567.04885,688.89911)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon2"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image2" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_-2_2_0"
+       transform="matrix(1.5909444,0,0,1.5909444,567.04885,964.45875)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon3"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image3" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_-1_-1_2"
+       transform="matrix(1.5909444,0,0,1.5909444,805.6905,275.55964)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon4"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/522880318e0e87c4d19e29bd3773a4c131bc1216.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image4" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_-1_0_1"
+       transform="matrix(1.5909444,0,0,1.5909444,805.6905,551.11929)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon5"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image5" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_-1_1_0"
+       transform="matrix(1.5909444,0,0,1.5909444,805.6905,826.67893)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon6"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/85efab29b66ac0c424e999e5efa627b6ae90a286.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image6" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_-1_2_-1"
+       transform="matrix(1.5909444,0,0,1.5909444,805.6905,1102.2386)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon7"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image7" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_0_-2_2"
+       transform="matrix(1.5909444,0,0,1.5909444,1044.3322,137.77982)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon8"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image8" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_0_-1_1"
+       transform="matrix(1.5909444,0,0,1.5909444,1044.3322,413.33947)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon9"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/a4502346e55394ac87b84b3dbba9a89f87b8c58a.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image9" />
+    </g>
+    <g
+       class="gOccupe"
+       id="ch0_hexa_0_0_0_0"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+       transform="matrix(1.5909444,0,0,1.5909444,1044.3322,688.89911)">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon10"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         class="gTitre"
+         id="g10"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+        <text
+           id="chText_ch0_hexa_0_0_0_0"
+           text-anchor="middle"
+           alignment-baseline="middle"
+           fill="white"
+           font-size="Infinityem"
+           style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_0_1_-1"
+       transform="matrix(1.5909444,0,0,1.5909444,1044.3322,964.45875)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon11"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image11" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_0_2_-2"
+       transform="matrix(1.5909444,0,0,1.5909444,1044.3322,1240.0184)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon12"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image12" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_1_-2_1"
+       transform="matrix(1.5909444,0,0,1.5909444,1282.9738,275.55964)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon13"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image13" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_1_-1_0"
+       transform="matrix(1.5909444,0,0,1.5909444,1282.9738,551.11929)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon14"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image14" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_1_0_-1"
+       transform="matrix(1.5909444,0,0,1.5909444,1282.9738,826.67893)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon15"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image15" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_1_1_-2"
+       transform="matrix(1.5909444,0,0,1.5909444,1282.9738,1102.2386)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon16"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/ed0a24671657905b1368d0eb91d4f4b9f580d713.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image16" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_2_-2_0"
+       transform="matrix(1.5909444,0,0,1.5909444,1521.6155,413.33947)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon17"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image17" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_2_-1_-1"
+       transform="matrix(1.5909444,0,0,1.5909444,1521.6155,688.89911)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon18"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image18" />
+    </g>
+    <g
+       class="gInit"
+       id="ch0_hexa_0_2_0_-2"
+       transform="matrix(1.5909444,0,0,1.5909444,1521.6155,964.45875)"
+       style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1">
+      <polygon
+         points="50,-86.60254 -50,-86.60254 -100,-1.2246468e-14 -50,86.60254 50,86.60254 100,0 "
+         class="hexaInitGrille"
+         id="polygon19"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
+      <image
+         href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/8afc1c693af3fce3f179a0234992bfb02b9684cd.jpg"
+         x="-50"
+         y="-50"
+         height="100"
+         width="100"
+         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
+         id="image19" />
+    </g>
+  </g>
+  <g
+     id="g19"
+     transform="translate(1872.0966,136.68672)">
+    <g
+       id="g21"
+       transform="translate(-2092.1054,-170.32765)"
+       style="stroke-width:30;stroke-dasharray:none">
+      <circle
+         class="bordFreloche"
+         cx="676.00879"
+         cy="489.64093"
+         id="ellipse19"
+         style="fill:none;stroke:#9d0000;stroke-width:30;stroke-dasharray:none;stroke-opacity:1"
+         r="441" />
+      <line
+         class="mancheFreloche"
+         x1="1083.3871"
+         y1="666.04095"
+         x2="1817.5175"
+         y2="983.92865"
+         id="line19"
+         style="fill:none;stroke:#9d0000;stroke-width:30;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>

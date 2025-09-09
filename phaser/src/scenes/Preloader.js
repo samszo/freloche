@@ -1,4 +1,6 @@
 import ASSETS from '../assets.js';
+import chaoticumPapillonae from '../gameObjects/chaoticumPapillonae.js';
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 export class Preloader extends Phaser.Scene {
     constructor() {
@@ -33,9 +35,36 @@ export class Preloader extends Phaser.Scene {
         //  Load the assets for the game - see ./src/assets.js
         for (let type in ASSETS) {
             for (let key in ASSETS[type]) {
-                let args = ASSETS[type][key].args.slice();
-                args.unshift(ASSETS[type][key].key);
-                this.load[type].apply(this.load, args);
+                switch (key) {
+                    case 'programmes':
+                        this.load.json(ASSETS[type][key].key, ASSETS[type][key].url);
+                        this.load.on("filecomplete-json-"+ASSETS[type][key].key, (key, type, data) => {
+                            data.forEach((e,i) => {
+                                let id = key+i,
+                                /*recalcule la dimension avec IIIF
+                                TROP LONG
+                                url = "http://localhost/omk_creationsp8/iiif/3/"+e["o:media/o:id"][0]+"/full/100,/0/default.png";
+                                */
+                                url = e["o:media/file"][0].replace("original","medium");
+                                this.load["image"].apply(this.load, [id,url,ASSETS[type][key].args]);   
+                            });
+                        });
+                        break;
+                    case 'papi':
+                        for (let index = 0; index < ASSETS[type][key].nb; index++) {
+                            let id = 'papi'+index,
+                                cp = new chaoticumPapillonae({'width':100,'height':100,'id':id}),
+                                blob = new Blob([cp.toString()], { type: 'image/svg+xml' }),
+                                url = URL.createObjectURL(blob);
+                            this.load['svg'].apply(this.load, [id,url,ASSETS[type][key].args]);
+                        }                        
+                        break;
+                    default:
+                        let args = ASSETS[type][key].args.slice();
+                        args.unshift(ASSETS[type][key].key);
+                        this.load[type].apply(this.load, args);
+                        break;
+                }
             }
         }
     }

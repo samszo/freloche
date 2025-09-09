@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
 
 $idCol = isset($_GET['idCol']) ? $_GET['idCol'] : false;
 $idItem = isset($_GET['idItem']) ? $_GET['idItem'] : false;

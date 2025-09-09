@@ -7,6 +7,7 @@ import ANIMATION from '../animation.js';
 import Player from '../gameObjects/Player.js';
 import PlayerBullet from '../gameObjects/PlayerBullet.js';
 import EnemyFlying from '../gameObjects/EnemyFlying.js';
+import ButterflyFlying from '../gameObjects/ButterflyFlying.js';
 import EnemyBullet from '../gameObjects/EnemyBullet.js';
 import Explosion from '../gameObjects/Explosion.js';
 
@@ -23,16 +24,21 @@ export class Game extends Phaser.Scene {
         this.initInput();
         this.initPhysics();
         this.initMap();
+        //this.initPapi();
+
+        //une image par ligne
+        for (let step = 0; step < 10; step++) {
+            this.addFlowerImages(step);
+        }
     }
 
     update() {
         this.updateMap();
-
         if (!this.gameStarted) return;
 
         this.player.update();
         if (this.spawnEnemyCounter > 0) this.spawnEnemyCounter--;
-        else this.addFlyingGroup();
+        else this.addFlyingButterflies();
     }
 
     initVariables() {
@@ -55,11 +61,12 @@ export class Game extends Phaser.Scene {
 
         this.map; // rference to tile map
         this.groundLayer; // reference to ground layer of tile map
+        this.flowers=[];
     }
 
     initGameUi() {
         //Create Logo
-        this.add.image(this.centreX, this.centreY, ASSETS.image.logo);
+        this.add.image(this.scale.width-100, 40, ASSETS.svg.logo.key).setDepth(100);
 
         // Create tutorial text
         this.tutorialText = this.add.text(this.centreX, this.centreY, 'Tap to shoot!', {
@@ -98,6 +105,7 @@ export class Game extends Phaser.Scene {
     }
 
     initPhysics() {
+        this.butterflyGroup = this.add.group();
         this.enemyGroup = this.add.group();
         this.enemyBulletGroup = this.add.group();
         this.playerBulletGroup = this.add.group();
@@ -105,6 +113,8 @@ export class Game extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.enemyBulletGroup, this.hitPlayer, null, this);
         this.physics.add.overlap(this.playerBulletGroup, this.enemyGroup, this.hitEnemy, null, this);
         this.physics.add.overlap(this.player, this.enemyGroup, this.hitPlayer, null, this);
+        this.physics.add.overlap(this.player, this.butterflyGroup, this.hitPlayer, null, this);
+
     }
 
     initPlayer() {
@@ -140,7 +150,49 @@ export class Game extends Phaser.Scene {
         this.map = this.make.tilemap({ data: mapData, tileWidth: this.tileSize, tileHeight: this.tileSize });
         const tileset = this.map.addTilesetImage(ASSETS.spritesheet.tiles.key);
         this.groundLayer = this.map.createLayer(0, tileset, 0, this.mapTop);
+
     }
+
+    // create butterflies
+    initPapi() {
+        //ajoute les papillons
+        for (let index = 0; index < ASSETS.svg.papi.nb; index++) {
+            this.add.image(Phaser.Math.RND.between(0, this.scale.width), Phaser.Math.RND.between(0, this.scale.height), 'papi'+index)
+                .setDepth(100);
+        }
+    }
+
+    //ajouter les fleurs photos
+    addFlowerImages(step) {
+        //choisi une photo aléatoire
+        let rs = this.cache.json.get('programmes'),
+            key = 'programmes'+Phaser.Math.RND.integerInRange(0, rs.length-1),
+        /*
+            sprite = this.physics.add.image(400, 300, key)
+            .setCircle(24, 0, 7.5)
+            .setVelocity(0, -100);
+        */
+            heightIma = 100,
+            time = (this.scale.height+(heightIma*2))*16.5,//prend en compte le défilement de la map 
+            //sprite = this.add.tileSprite(x, y, 100, 100, key);                        
+            sprite = this.add.image(Phaser.Math.RND.between(heightIma, this.scale.width-heightIma),-heightIma,key)
+                .setDepth(50)
+                .setScale(0.5);
+        this.tweens.add({
+            targets: sprite,
+            delay: time*step/6,
+            props: {
+                y: {
+                    value: '+='+(this.scale.height+(heightIma*2))
+                }
+            },
+            duration: time
+        });
+        //                    
+        this.flowers.push(sprite);
+
+    }
+
 
     // scroll the tile map
     updateMap() {
@@ -177,7 +229,8 @@ export class Game extends Phaser.Scene {
     startGame() {
         this.gameStarted = true;
         this.tutorialText.setVisible(false);
-        this.addFlyingGroup();
+        //this.addFlyingGroup();
+        this.addFlyingButterflies();
     }
 
     fireBullet(x, y) {
@@ -217,6 +270,32 @@ export class Game extends Phaser.Scene {
                 repeat: randomCount
             }
         );
+    }
+
+    // add a group of flying butterflies
+    addFlyingButterflies() {
+        this.spawnEnemyCounter = Phaser.Math.RND.between(5, 8) * 60; // spawn next group after x seconds
+        const randomId = Phaser.Math.RND.between(0, 11); // id to choose image in tiles.png
+        const randomCount = 0;//Phaser.Math.RND.between(5, 15); // number of enemies to spawn
+        const randomInterval = Phaser.Math.RND.between(8, 12) * 100; // delay between spawning of each enemy
+        const randomPath = Phaser.Math.RND.between(0, 3); // choose a path, a group follows the same path
+        const randomPower = Phaser.Math.RND.between(1, 4); // strength of the enemy to determine damage to inflict and selecting bullet image
+        const randomSpeed = Phaser.Math.RND.realInRange(0.0001, 0.001); // increment of pathSpeed in enemy
+
+        this.timedEvent = this.time.addEvent(
+            {
+                delay: randomInterval,
+                callback: this.addButterfly,
+                args: [randomId, randomPath, randomSpeed, randomPower], // parameters passed to addEnemy()
+                callbackScope: this,
+                repeat: randomCount
+            }
+        );
+    }    
+
+    addButterfly(butterflyId, randomPath, speed, power) {
+        const butterfly = new ButterflyFlying(this, butterflyId, randomPath, speed, power);
+        this.butterflyGroup.add(butterfly);
     }
 
     addEnemy(shipId, pathId, speed, power) {

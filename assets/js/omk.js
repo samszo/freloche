@@ -7,18 +7,18 @@ export class omk {
         this.ident = params.ident ? params.ident : false;
         this.mail = params.mail ? params.mail : false;
         this.api = params.api ? params.api : false;
-        this.vocabs = params.vocabs ? params.vocabs : ['dcterms','ma','oa','jdc','bibo','skos','foaf','bio'];
+        this.vocabs = params.vocabs ? params.vocabs : ['dcterms','fup8','bibo'];
         this.loader = new loader();
         this.user = false;
         this.props = [];
         this.class = [];
         this.medias = [];
         this.items = [];
-        this.owners = []
         this.resources = [];
         this.rts
+        this.anythingLLM = false;
         this.queries = [];
-        let perPage = 100, types={'items':'o:item','media':'o:media'};
+        let perPage = 1000, types={'items':'o:item','media':'o:media'};
                 
         this.init = function () {
             //récupères les propriétés
@@ -27,7 +27,7 @@ export class omk {
                 me.getClass(v);
             })
             me.setRT();
-            me.loader.hide();
+            me.loader.hide(true);
         }
         this.setRT = function (cb=false){
             me.rts = syncRequest(me.api+'resource_templates?per_page=1000');
@@ -48,6 +48,9 @@ export class omk {
             data.forEach(p=>me.props.push(p));
             if(cb)cb(me.props);
         }
+        this.getPropById = function (id){
+            return me.props.filter(prp=>prp['o:id']==id)[0];                        
+        }
         this.getPropId = function (t){
             return me.props.filter(prp=>prp['o:term']==t)[0]['o:id'];                        
         }
@@ -59,6 +62,11 @@ export class omk {
                 data = syncRequest(url);
             data.forEach(c=>me.class.push(c));
             if(cb)cb(data);
+        }
+
+        this.getClassById = function (id){
+            let c = me.class.filter(c=>c['o:id']==id);
+            return c[0];
         }
 
         this.getClassByName = function (cl){
@@ -120,7 +128,7 @@ export class omk {
         }
 
 
-        this.updateRessource = function (id, data, type='items', fd=null, m='PUT',cb=false, dataOri=false){
+        this.updateRessource = async function (id, data, type='items', fd=null, m='PUT',cb=false, dataOri=false){
             let oriData, newData, url = me.api+type+'/'+id+'?key_identity='+me.ident+'&key_credential='+me.key;
             if(data){
                 //récupère les données originales
@@ -132,7 +140,7 @@ export class omk {
                         //vérifie si la propriété est dans les données originales                        
                         if(oriData[p]){
                             //m=="PUT" : on ajoute les nouvelles valeurs
-                            if(m=="PUT")oriData[p]=oriData[p].concat(newData[p]);
+                            if(m=="PUT")oriData[p]= Array.isArray(oriData[p]) ? oriData[p].concat(newData[p]) : newData[p];
                             //m=="PATCH" : on modifie les valeurs
                             if(m=="PATCH")oriData[p]=newData[p];          
                         }else{
@@ -142,11 +150,10 @@ export class omk {
                     }
                 }
             }
-            postData({'u':url,'m':m}, fd ? fd : oriData).then((rs) => {
-                me.items[rs['o:id']]=rs;
-                if(cb)cb(rs);
-            });
-
+            let rs = await postData({'u':url,'m':m}, fd ? fd : oriData);
+            me.items[rs['o:id']]=rs;
+            if(cb)cb(rs)
+            else return rs;
         }        
 
         this.getItem = function (id, cb=false){
@@ -157,16 +164,6 @@ export class omk {
             if(cb)cb(rs);                    
             return rs;
         }
-
-        this.getOwner = function (id, cb=false){
-            if(me.owners[id])return me.owners[id];
-            let url = me.api+'users/'+id+'?key_identity='+me.ident+'&key_credential='+me.key,
-                rs = syncRequest(url);
-            me.owners[id]=rs;
-            if(cb)cb(rs);                    
-            return rs;
-        }
-        
 
         this.getMedia = function (id, cb=false){
             if(me.medias[id])return me.medias[id];
@@ -187,6 +184,35 @@ export class omk {
             return me.api.replace("/api","")+file;
         }
 
+        this.getPropsHeader = function (item){
+            let header = [];
+            header.push({'o:label':'id','o:term':'o:id'});
+            if(item["o:resource_template"]){
+                me.getRtById(item['o:resource_template']['o:id'])["o:resource_template_property"].forEach(p=>{
+                    header.push(me.getPropById(p["o:property"]["o:id"]));
+                })   
+            }
+            return header;
+        }            
+
+        this.getDataForGrid = function (data,headers){
+            let gridData = [];
+            data.forEach(item=>{
+                let row = {'id':item['o:id']};
+                headers.forEach(h=>{
+                    if(item[h['o:term']]){
+                        if(h['o:term']=='o:id'){
+                            row[h['o:label']] = item[h['o:term']];
+                        }else{
+                            row[h['o:label']] = item[h['o:term']].map(d=>d.display_title ? d.display_title : d["@value"]).join(' - ');
+                        }
+                    }else row[h['o:label']] = '';
+                })                
+                gridData.push(row);
+            })   
+            return gridData;
+        }            
+
         //merci à https://stackoverflow.com/questions/33780271/export-a-json-object-to-a-text-file/52297652#52297652
         this.saveJson=function(data){
             const filename = 'data.json';
@@ -206,16 +232,15 @@ export class omk {
             let url = me.api+'items?per_page='+perPage+'&'+query+'&page=', fin=false, rs=[], data, page=1;
             //pause pour gérer l'affichage du loader
             //setTimeout(function(){
-                while (!fin) {
-                    data = syncRequest(url+page);
-                    //console.log(url+page,data);
-                    fin = data.length ? false : true;
-                    rs = rs.concat(data);
-                    page++;
-                }                
-                return cb ? cb(rs) : rs;                    
-            //}, 100);
-        }
+            while (!fin) {
+                data = syncRequest(url+page);
+                //console.log(url+page,data);
+                fin = data.length ? false : true;
+                rs = rs.concat(data);
+                page++;
+            }
+            return cb ? cb(rs) : rs;                    
+    }
 
         this.getAllMedias = function (query, cb=false){
             let url = me.api+'media?per_page='+perPage+'&'+query+'&page=', fin=false, rs=[], data, page=1;
@@ -246,13 +271,13 @@ export class omk {
             d3.json(url).then((data) => {
                 me.user = data.length ? data[0] : false;
                 //TODO: mieux gérer anythingLLM Login
-                //me.user.anythingLLM = syncRequest(me.api.replace('api/','s/cours-bnf/page/ajax?json=1&helper=anythingLLMlogin'));
+                me.user.anythingLLM = me.anythingLLM ? syncRequest(me.api.replace('api/','s/cours-bnf/page/ajax?json=1&helper=anythingLLMlogin')) : false;
                 if(cb)cb(me.user);
             });
 
         }
 
-        this.createItem = function (data, cb=false, verifDoublons, file){
+        this.createItem = async function (data, cb=false, verifDoublons){
             if(verifDoublons){
                 let items = me.searchItems(verifDoublons);
                 if(items.length){
@@ -260,11 +285,11 @@ export class omk {
                     return items[0];
                 }
             }
-            let url = me.api+'items?key_identity='+me.ident+'&key_credential='+me.key;
-            postData({'u':url,'m':'POST'}, me.formatData(data),file).then((rs) => {
-                me.items[rs['o:id']]=rs;
-                if(cb)cb(rs);
-            });
+            let url = me.api+'items?key_identity='+me.ident+'&key_credential='+me.key,
+            rs = await postData({'u':url,'m':'POST'}, me.formatData(data));
+            me.items[rs['o:id']]=rs;
+            if(cb)cb(rs);
+            return rs;
         }
 
         this.getConcept = async function (concept){
@@ -283,7 +308,40 @@ export class omk {
                 };
             return await postData({'u':url,'m':'POST'}, me.formatData(data));
         }
-
+        this.getsetResource = async function (r,u){
+            if(me.items[r.index])return me.items[r.index];
+            //vérifie l'existence de la ressource
+            let query = "resource_class_id[]="+me.getClassByTerm(r.c)['o:id'], i=0, items=[], url;
+            if(!r.verif)r.verif=r.dt;
+            else if(r.verif.id){
+                items = me.getItem(r.verif.id);
+            }else{
+                for (const k in r.verif) {
+                    query += "&property["+i+"][joiner]=and&property["+i+"][property]="
+                    +me.getPropId(k)
+                    +"&property["+i+"][type]=eq&property["+i+"][text]="+encodeURI(r.verif[k]);
+                }
+                items = me.searchItems(query);
+                url = me.api+'items?key_identity='+me.ident+'&key_credential='+me.key;
+                r.dt['o:resource_class']=r.c;
+                r.dt['o:resource_template']=r.rt;
+            }
+            //création ou mise à jour de l'item
+            if(items.length){
+                me.items[r.index]=items[0];
+                //vérifie s'il faut faire un update
+                if(u){
+                    let uData = me.formatData(u);
+                    uData.forEach((v,k)=>{
+                        items[0][k].push(v);
+                    })
+                    me.items[r.index] = await postData({'u':url,'m':'PATCH'}, items[0]);
+                    return me.items[r.index];
+                }else return items[0];
+            } 
+            me.items[r.index] = await postData({'u':url,'m':'POST'}, me.formatData(r.dt));
+            return me.items[r.index];
+        }
         this.formatData = function (data,type="o:Item"){
             let fd = {"@type" : type},p;
             for (let [k, v] of Object.entries(data)) {
@@ -316,6 +374,7 @@ export class omk {
                     default:
                         if(!fd[k])fd[k]=[];
                         p = me.props.filter(prp=>prp['o:term']==k)[0];
+                        if(!p)throw new Error("Cette propriété n'existe pas : "+k);
                         if(Array.isArray(v)){
                             fd[k] = v.map(val=>formatValue(p,val));
                         }else                        
@@ -325,9 +384,17 @@ export class omk {
             }                         
             return fd;
         }
+        this.valueFormat = function(p,v){
+            return formatValue(p,v);
+        }
         function formatValue(p,v){
             if(typeof v === 'object' && v.rid)
                 return {"property_id": p['o:id'], "value_resource_id" : v.rid, "type" : "resource" };    
+            else if(typeof v === 'object' && v.a){
+                let value = formatValue(p,v.v);
+                value["@annotation"]=v.a;
+                return value;
+            }
             else if(typeof v === 'object' && v.u)
                 return {"property_id": p['o:id'], "@id" : v.u, "o:label":v.l, "type" : "uri" };    
             else if(typeof v === 'object')
@@ -335,7 +402,7 @@ export class omk {
             else
                 return {"property_id": p['o:id'], "@value" : v, "type" : "literal" };    
         }
-        
+
         async function postData(url, data = {},file) {
             // Default options are marked with *
             let bodyData, 
@@ -361,7 +428,7 @@ export class omk {
                 options.body=bodyData;
             }
             const response = await fetch(url.u, options);
-            me.loader.hide();
+            me.loader.hide(true);
             return response.json(); // parses JSON response into native JavaScript objects
         }        
 
@@ -369,7 +436,7 @@ export class omk {
             let url = me.api.replace('api','s')+q;
             me.loader.show();
             d3.json(url).then(json=>{
-                me.loader.hide();
+                me.loader.hide(true);
                 cb(json);
             });
             //cb(syncRequest(url));

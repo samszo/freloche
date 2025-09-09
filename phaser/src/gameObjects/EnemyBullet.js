@@ -6,7 +6,8 @@ export default class EnemyBullet extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene, x, y, power) {
         const tileId = 11;
-        super(scene, x, y, ASSETS.spritesheet.tiles.key, tileId + power);
+        //super(scene, x, y, ASSETS.spritesheet.tiles.key, tileId + power);
+        super(scene, x, y, 'programmes1');
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
