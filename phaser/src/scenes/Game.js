@@ -33,7 +33,7 @@ export class Game extends Phaser.Scene {
     }
 
     update() {
-        this.updateMap();
+        //this.updateMap();
         if (!this.gameStarted) return;
 
         this.player.update();
@@ -48,7 +48,7 @@ export class Game extends Phaser.Scene {
 
         // list of tile ids in tiles.png
         // items nearer to the beginning of the array have a higher chance of being randomly chosen when using weighted()
-        this.tiles = [50, 50, 50, 50, 50, 50, 50, 50, 50, 110, 110, 110, 110, 110, 50, 50, 50, 50, 50, 50, 50, 50, 50, 110, 110, 110, 110, 110, 36, 48, 60, 72, 84];
+        this.tiles = [50, 50, 50, 50, 50, 50, 50, 50, 50, 110, 110, 110, 110, 110, 50, 50, 50, 50, 50, 50, 50, 50, 50, 110, 110, 110, 110, 110, 36, 48, 60];
         this.tileSize = 32; // width and height of a tile in pixels
 
         this.mapOffset = 10; // offset (in tiles) to move the map above the top of the screen
@@ -66,7 +66,7 @@ export class Game extends Phaser.Scene {
 
     initGameUi() {
         //Create Logo
-        this.add.image(this.scale.width-100, 40, ASSETS.svg.logo.key).setDepth(100);
+        this.add.image(this.scale.width-100, 80, ASSETS.svg.logo.key).setDepth(100);
 
         // Create tutorial text
         this.tutorialText = this.add.text(this.centreX, this.centreY, 'Tap to shoot!', {
@@ -78,7 +78,7 @@ export class Game extends Phaser.Scene {
             .setDepth(100);
 
         // Create score text
-        this.scoreText = this.add.text(20, 20, 'Score: 0', {
+        this.scoreText = this.add.text(20, 60, 'Score: 0', {
             fontFamily: 'Arial Black', fontSize: 28, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
         })
