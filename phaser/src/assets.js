@@ -8,8 +8,8 @@ export default {
     'json': {
          programmes: {
              key: 'programmes',
-             url: 'http://localhost/omk_creationsp8/files/bulk_export/programme_de_l_universite_json-20250908-054909.table.json',
-             args: {scale:0.2}
+             url: 'http://localhost/omk_creationsp8/files/bulk_export/programme_de_l_universite_json-20250911-181502.table.json',
+             args: {scale:1}
          },
     },
     'svg': {
@@ -26,6 +26,13 @@ export default {
              nb: 12,
              args: {scale:0.8}
          },
+         /*
+         flower: {
+             key: 'flower',
+             nb: 12,
+             args: {scale:0.8}
+         },
+         */
     },
     'spritesheet': {
         ships: {

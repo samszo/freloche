@@ -1,5 +1,6 @@
 import ASSETS from '../assets.js';
 import chaoticumPapillonae from '../gameObjects/chaoticumPapillonae.js';
+import chaoticumFlower from '../gameObjects/chaoticumFlower.js';
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 export class Preloader extends Phaser.Scene {
@@ -39,21 +40,40 @@ export class Preloader extends Phaser.Scene {
                     case 'programmes':
                         this.load.json(ASSETS[type][key].key, ASSETS[type][key].url);
                         this.load.on("filecomplete-json-"+ASSETS[type][key].key, (key, type, data) => {
-                            data.forEach((e,i) => {
-                                let id = key+i,
+                            //regroupe les programmes par thème
+                            let themes = d3.group(data, d => d["dcterms:date"][0]);
+                            this.registry.set('themes', themes);
+                            //charge les images des items   
+                            themes.forEach((docs,i) => {
+                                let id = key+i;
                                 /*recalcule la dimension avec IIIF
                                 TROP LONG
                                 url = "http://localhost/omk_creationsp8/iiif/3/"+e["o:media/o:id"][0]+"/full/100,/0/default.png";
                                 */
+                                //récupère les infos IIIF pour avoir les dimensions dans la fleur
+                                Promise.all(docs.map(d=>d3.json("http://localhost/omk_creationsp8/iiif/3/"+d["o:media/o:id"][0]+"/info.json"))).then((values) => {
+                                    //construction de la fleur
+                                    console.log(values); // [3, 1337, "foo"]
+                                    let cf = new chaoticumFlower({'width':300,'height':300,'id':id,'photos':values}),
+                                    blob = new Blob([cf.toString()], { type: 'image/svg+xml' }),
+                                    url = URL.createObjectURL(blob);
+                                    this.load['svg'].apply(this.load, [id,url,ASSETS[type][key].args]);                                
+                                });
+
+                                /*charge la photo comme une image
                                 url = e["o:media/file"][0].replace("original","medium");
                                 this.load["image"].apply(this.load, [id,url,ASSETS[type][key].args]);   
+                                */
                             });
                         });
                         break;
                     case 'papi':
+                    //case 'flower':
                         for (let index = 0; index < ASSETS[type][key].nb; index++) {
-                            let id = 'papi'+index,
-                                cp = new chaoticumPapillonae({'width':100,'height':100,'id':id}),
+                            let id = key+index,
+                                cp = key == 'papi' ? 
+                                    new chaoticumPapillonae({'width':100,'height':100,'id':id})
+                                    : new chaoticumFlower({'width':100,'height':100,'id':id}),
                                 blob = new Blob([cp.toString()], { type: 'image/svg+xml' }),
                                 url = URL.createObjectURL(blob);
                             this.load['svg'].apply(this.load, [id,url,ASSETS[type][key].args]);

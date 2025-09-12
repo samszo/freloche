@@ -25,11 +25,13 @@ export class Game extends Phaser.Scene {
         this.initPhysics();
         this.initMap();
         //this.initPapi();
-
-        //une image par ligne
+        this.initFlower();
+        
+        /*une image qui défile
         for (let step = 0; step < 10; step++) {
             this.addFlowerImages(step);
         }
+        */
     }
 
     update() {
@@ -158,6 +160,14 @@ export class Game extends Phaser.Scene {
         //ajoute les papillons
         for (let index = 0; index < ASSETS.svg.papi.nb; index++) {
             this.add.image(Phaser.Math.RND.between(0, this.scale.width), Phaser.Math.RND.between(0, this.scale.height), 'papi'+index)
+                .setDepth(100);
+        }
+    }
+    // create flowers
+    initFlower() {
+        //ajoute les fleurs
+        for (let index = 1970; index < 1997; index++) {
+            this.add.image(Phaser.Math.RND.between(0, this.scale.width), Phaser.Math.RND.between(0, this.scale.height), 'programmes'+index+'-'+(index+1))
                 .setDepth(100);
         }
     }

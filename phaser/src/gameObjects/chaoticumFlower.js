@@ -6,7 +6,8 @@ export default class chaoticumFlower {
         this.id = params.id ? params.id : "flowerSvg";
         this.width = params.width ? params.width : 400;
         this.height = params.height ? params.height : 400;
-        this.numberOfPetals = params.numberOfPetals ? params.numberOfPetals : 6;
+        this.photos = params.photos ? params.photos : false;
+        this.numberOfPetals = params.numberOfPetals ? params.numberOfPetals : me.photos ? me.photos.lenght : 6;
         this.scaleColors = params.scaleColors ? params.scaleColors : d3.scaleSequential(d3.interpolateRainbow);
         this.modelesPetal = params.modelesPetal ? params.modelesPetal : [
             'M0 0 C50 40 50 70 20 100 L0 85 L-20 100 C-50 70 -50 40 0 0'
@@ -22,8 +23,8 @@ export default class chaoticumFlower {
                 .attr("class","chaoticumFlower");
 
             let flower = svg.append('g')
-                .attr('transform', `translate(${width / 2}, ${height / 2})`),
-                color = getRndRGBColor(me.numberOfPetals)[0],
+                .attr('transform', `translate(${me.width / 2}, ${me.height / 2})`),
+                color = getRndRGBColor(1)[0],
                 opacity = 1;
             
             flower
@@ -36,7 +37,6 @@ export default class chaoticumFlower {
                 .attr("fill",  color)
                 .attr('fill-opacity', opacity)
                 .attr('transform', d => `rotate(${d})scale(0.5)`);
-            return svg.node();
         }            
             
         this.toString = function(){
@@ -45,9 +45,6 @@ export default class chaoticumFlower {
         function getAngles(numberOfPetals){return(
             d3.range(0, 360, 360 / numberOfPetals)
         )}
-        this.toString = function(){
-            return svg.node().outerHTML;
-        }
         function getRndRGBColor(nb)
         {
             //initialise le random

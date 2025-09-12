@@ -1,6 +1,6 @@
 import ASSETS from '../assets.js';
 
-export default class Player extends Phaser.Physics.Arcade.Sprite {
+export default class flower extends Phaser.Physics.Arcade.Sprite {
     velocityIncrement = 50;
     velocityMax = 500;
     drag = 1000;
@@ -8,9 +8,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     fireCounter = 0;
     health = 1;
 
-    constructor(scene, x, y, shipId) {
-        //super(scene, x, y, ASSETS.spritesheet.ships.key, shipId);
-        super(scene, x, y, 'freloche');
+    constructor(scene, x, y, flowerId) {
+        super(scene, x, y, 'flower'+flowerId);
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -18,8 +17,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true); // prevent ship from leaving the screen
         this.setDepth(100); // make ship appear on top of other game objects
         this.scene = scene;
-        this.setMaxVelocity(this.velocityMax); // limit maximum speed of ship
-        this.setDrag(this.drag);
     }
 
     preUpdate(time, delta) {
