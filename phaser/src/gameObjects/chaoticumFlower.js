@@ -6,11 +6,11 @@ export default class chaoticumFlower {
         this.id = params.id ? params.id : "flowerSvg";
         this.width = params.width ? params.width : 400;
         this.height = params.height ? params.height : 400;
-        this.photos = params.photos ? params.photos : false;
-        this.numberOfPetals = params.numberOfPetals ? params.numberOfPetals : me.photos ? me.photos.lenght : 6;
+        this.docs = params.docs ? params.docs : false;
+        this.numberOfPetals = params.numberOfPetals ? params.numberOfPetals : me.docs ? me.docs[1].length : 6;
         this.scaleColors = params.scaleColors ? params.scaleColors : d3.scaleSequential(d3.interpolateRainbow);
         this.modelesPetal = params.modelesPetal ? params.modelesPetal : [
-            'M0 0 C50 40 50 70 20 100 L0 85 L-20 100 C-50 70 -50 40 0 0'
+            {'path':'M0 0 C50 40 50 70 20 100 L0 85 L-20 100 C-50 70 -50 40 0 0','viewBox':"-53 -50 106 100"},
         ];
         let svg;
         this.init = function () {
@@ -20,22 +20,50 @@ export default class chaoticumFlower {
                 .attr("width", me.width)
                 .attr("height", me.height)
                 .attr("id", me.id)
+                .attr("viewBox", me.modelesPetal[0].viewBox)
                 .attr("class","chaoticumFlower");
+            //définition du style
+            let angles = getAngles(me.numberOfPetals),
+                color = getRndRGBColor(1)[0],
+                opacity = 0.8;
+            svg.append("style").text("path { stroke:"+d3.color(color).darker()+";stroke-width:0;fill-opacity:"+opacity+"}");
+
+            //construction des pattern avec les images
+            if(me.docs){
+                let patterns = svg.append('defs')
+                    .selectAll("pattern")
+                    .data(me.docs[1])
+                    .join("pattern")
+                    .attr("id", (d,i) => "img"+i)
+                    .attr("patternUnits", "userSpaceOnUse")
+                    .attr("preserveAspectRatio","xMidYMid")
+                    //.attr("patternTransform",(d,i)=>d.photo ? `rotate(${angles[i]})translate(-${d.photo.width/10/2},10)`:"")
+                    .attr("width", d=>d.photo ? d.photo.width : 0)
+                    .attr("height", d=>d.photo ? d.photo.height : 0);
+                
+                patterns.append("image")
+                    .attr("href", d => {
+                        return d.photo ? d.photo.data : ""
+                    })
+                    .attr("preserveAspectRatio","none")
+                    .attr("width", d=>d.photo ? d.photo.width/10 : 0)
+                    .attr("height", d=>d.photo ? d.photo.height/10 : 0);
+            }
+            
 
             let flower = svg.append('g')
-                .attr('transform', `translate(${me.width / 2}, ${me.height / 2})`),
-                color = getRndRGBColor(1)[0],
-                opacity = 1;
-            
-            flower
                 .selectAll(".petal")
                 .data(getAngles(me.numberOfPetals))
                 .join("path")
-                .attr("d", me.modelesPetal[0])
+                .attr("d", me.modelesPetal[0].path)
+                /*défini dans le style
                 .attr('stroke', d3.color(color).darker())
                 .attr('stroke-width', 4)
-                .attr("fill",  color)
                 .attr('fill-opacity', opacity)
+                */
+                .attr("fill", (d,i) => {
+                    return me.docs[1][i] && me.docs[1][i].photo ? "url(#img"+i+")" : color
+                })
                 .attr('transform', d => `rotate(${d})scale(0.5)`);
         }            
             
@@ -53,7 +81,8 @@ export default class chaoticumFlower {
                 colors.push(me.scaleColors ? me.scaleColors(Math.random()) : '#' + (Math.random() * 0xffffff | 0).toString(16));
             }
             return colors;
-        }        
+        }
+        
         me.init();
     }
 

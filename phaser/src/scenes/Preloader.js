@@ -38,33 +38,45 @@ export class Preloader extends Phaser.Scene {
             for (let key in ASSETS[type]) {
                 switch (key) {
                     case 'programmes':
-                        this.load.json(ASSETS[type][key].key, ASSETS[type][key].url);
+                        this.load.json(ASSETS[type][key].key, ASSETS[type][key].url);                        
                         this.load.on("filecomplete-json-"+ASSETS[type][key].key, (key, type, data) => {
-                            //regroupe les programmes par thème
-                            let themes = d3.group(data, d => d["dcterms:date"][0]);
-                            this.registry.set('themes', themes);
-                            //charge les images des items   
-                            themes.forEach((docs,i) => {
-                                let id = key+i;
-                                /*recalcule la dimension avec IIIF
-                                TROP LONG
-                                url = "http://localhost/omk_creationsp8/iiif/3/"+e["o:media/o:id"][0]+"/full/100,/0/default.png";
-                                */
-                                //récupère les infos IIIF pour avoir les dimensions dans la fleur
-                                Promise.all(docs.map(d=>d3.json("http://localhost/omk_creationsp8/iiif/3/"+d["o:media/o:id"][0]+"/info.json"))).then((values) => {
-                                    //construction de la fleur
-                                    console.log(values); // [3, 1337, "foo"]
-                                    let cf = new chaoticumFlower({'width':300,'height':300,'id':id,'photos':values}),
+                            let themes=data;
+                            if(ASSETS[type][key].sauve){
+                                //enregistre les données de l'image
+                                Promise.all(data.map(d=>d3.json("http://localhost/omk_creationsp8/iiif/3/"+d["o:media/o:id"][0]+"/info.json"))).then((values) => {
+                                    values.forEach((v,i) => {
+                                        data[i].photo = v;
+                                    });
+
+                                    //enregistre les data de la photo
+                                    Promise.all(data.map(d=>this.getImageData(d.photo['id']+"/full/max/0/default.jpg"))).then((values) => {
+                                        values.forEach((r,i) => {                                           
+                                            data[i].photo.data = r;
+                                        });                                    
+                                        //regroupe les programmes par thème
+                                        themes = d3.group(data, d => d["dcterms:date"][0]);
+                                        console.log(themes);
+                                    });
+                                });
+                            }else{
+                                //construction des fleurs
+                                ASSETS[type][key].nb = themes.length;
+                                themes.forEach((docs,i) => {
+                                    let id = key+i;
+                                    let cf = new chaoticumFlower({'width':300,'height':300,'id':id,'docs':docs}),
                                     blob = new Blob([cf.toString()], { type: 'image/svg+xml' }),
                                     url = URL.createObjectURL(blob);
                                     this.load['svg'].apply(this.load, [id,url,ASSETS[type][key].args]);                                
                                 });
-
-                                /*charge la photo comme une image
-                                url = e["o:media/file"][0].replace("original","medium");
-                                this.load["image"].apply(this.load, [id,url,ASSETS[type][key].args]);   
-                                */
-                            });
+                            } 
+                            /*recalcule la dimension avec IIIF
+                            TROP LONG
+                            url = "http://localhost/omk_creationsp8/iiif/3/"+e["o:media/o:id"][0]+"/full/100,/0/default.png";
+                            */
+                            /*charge la photo comme une image
+                            url = e["o:media/file"][0].replace("original","medium");
+                            this.load["image"].apply(this.load, [id,url,ASSETS[type][key].args]);   
+                            */
                         });
                         break;
                     case 'papi':
@@ -95,5 +107,16 @@ export class Preloader extends Phaser.Scene {
 
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         this.scene.start('Game');
+    }
+    async getImageData(url){
+        const blob = await fetch(url).then(r => r.blob());
+        const read = (blob) => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (event) => resolve(event.target.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+        });
+        const result = await read(blob);
+        return result;
     }
 }

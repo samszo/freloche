@@ -166,9 +166,9 @@ export class Game extends Phaser.Scene {
     // create flowers
     initFlower() {
         //ajoute les fleurs
-        for (let index = 1970; index < 1997; index++) {
-            this.add.image(Phaser.Math.RND.between(0, this.scale.width), Phaser.Math.RND.between(0, this.scale.height), 'programmes'+index+'-'+(index+1))
-                .setDepth(100);
+        for (let index = 0; index < ASSETS.json.programmes.nb; index++) {
+            this.add.image(Phaser.Math.RND.between(0, this.scale.width), Phaser.Math.RND.between(0, this.scale.height), 'programmes'+index)
+                .setDepth(80);
         }
     }
 

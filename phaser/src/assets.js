@@ -8,8 +8,12 @@ export default {
     'json': {
          programmes: {
              key: 'programmes',
-             url: 'http://localhost/omk_creationsp8/files/bulk_export/programme_de_l_universite_json-20250911-181502.table.json',
-             args: {scale:1}
+             /*
+             url: 'http://localhost/omk_creationsp8/files/bulk_export/programme_de_l_universite_json-20250912-150309.table.json',
+             sauve:true,
+             */
+             url: 'assets/programmes.json',
+             args: {scale:1},             
          },
     },
     'svg': {
