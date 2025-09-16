@@ -16,6 +16,7 @@ export class Preloader extends Phaser.Scene {
         const barHeight = 32;
         const barMargin = 4;
         //  We loaded this image in our Boot Scene, so we can display it here
+        this.add.image(centreX, centreY - 100, 'logoPara');
 
         //  A simple progress bar. This is the outline of the bar.
         this.add.rectangle(centreX, centreY, barWidth, barHeight).setStrokeStyle(1, 0xffffff);
@@ -61,9 +62,10 @@ export class Preloader extends Phaser.Scene {
                             }else{
                                 //construction des fleurs
                                 ASSETS[type][key].nb = themes.length;
+                                ASSETS[type][key].themes = themes;
                                 themes.forEach((docs,i) => {
                                     let id = key+i;
-                                    let cf = new chaoticumFlower({'width':300,'height':300,'id':id,'docs':docs}),
+                                    let cf = new chaoticumFlower({'width':100,'height':100,'id':id,'docs':docs}),
                                     blob = new Blob([cf.toString()], { type: 'image/svg+xml' }),
                                     url = URL.createObjectURL(blob);
                                     this.load['svg'].apply(this.load, [id,url,ASSETS[type][key].args]);                                

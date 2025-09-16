@@ -8,6 +8,7 @@ import Player from '../gameObjects/Player.js';
 import PlayerBullet from '../gameObjects/PlayerBullet.js';
 import EnemyFlying from '../gameObjects/EnemyFlying.js';
 import ButterflyFlying from '../gameObjects/ButterflyFlying.js';
+import FlowerInField from '../gameObjects/FlowerInField.js';
 import EnemyBullet from '../gameObjects/EnemyBullet.js';
 import Explosion from '../gameObjects/Explosion.js';
 
@@ -63,7 +64,6 @@ export class Game extends Phaser.Scene {
 
         this.map; // rference to tile map
         this.groundLayer; // reference to ground layer of tile map
-        this.flowers=[];
     }
 
     initGameUi() {
@@ -108,6 +108,7 @@ export class Game extends Phaser.Scene {
 
     initPhysics() {
         this.butterflyGroup = this.add.group();
+        this.flowersGroup = this.add.group();
         this.enemyGroup = this.add.group();
         this.enemyBulletGroup = this.add.group();
         this.playerBulletGroup = this.add.group();
@@ -116,6 +117,7 @@ export class Game extends Phaser.Scene {
         this.physics.add.overlap(this.playerBulletGroup, this.enemyGroup, this.hitEnemy, null, this);
         this.physics.add.overlap(this.player, this.enemyGroup, this.hitPlayer, null, this);
         this.physics.add.overlap(this.player, this.butterflyGroup, this.hitPlayer, null, this);
+        this.physics.add.overlap(this.flowersGroup, this.butterflyGroup, this.butineFlower, null, this);
 
     }
 
@@ -167,40 +169,9 @@ export class Game extends Phaser.Scene {
     initFlower() {
         //ajoute les fleurs
         for (let index = 0; index < ASSETS.json.programmes.nb; index++) {
-            this.add.image(Phaser.Math.RND.between(0, this.scale.width), Phaser.Math.RND.between(0, this.scale.height), 'programmes'+index)
-                .setDepth(80);
+            const flower = new FlowerInField(this, 'programmes',index, Phaser.Math.RND.between(0, this.scale.width), Phaser.Math.RND.between(0, this.scale.height));
+            this.flowersGroup.add(flower);
         }
-    }
-
-    //ajouter les fleurs photos
-    addFlowerImages(step) {
-        //choisi une photo aléatoire
-        let rs = this.cache.json.get('programmes'),
-            key = 'programmes'+Phaser.Math.RND.integerInRange(0, rs.length-1),
-        /*
-            sprite = this.physics.add.image(400, 300, key)
-            .setCircle(24, 0, 7.5)
-            .setVelocity(0, -100);
-        */
-            heightIma = 100,
-            time = (this.scale.height+(heightIma*2))*16.5,//prend en compte le défilement de la map 
-            //sprite = this.add.tileSprite(x, y, 100, 100, key);                        
-            sprite = this.add.image(Phaser.Math.RND.between(heightIma, this.scale.width-heightIma),-heightIma,key)
-                .setDepth(50)
-                .setScale(0.5);
-        this.tweens.add({
-            targets: sprite,
-            delay: time*step/6,
-            props: {
-                y: {
-                    value: '+='+(this.scale.height+(heightIma*2))
-                }
-            },
-            duration: time
-        });
-        //                    
-        this.flowers.push(sprite);
-
     }
 
 
@@ -328,6 +299,17 @@ export class Game extends Phaser.Scene {
 
         this.GameOver();
     }
+
+    butineFlower(flower, butterfly) {
+        if(flower.isButine()){
+            this.addExplosion(flower.x, flower.y);
+            return;
+        } 
+        flower.hit(butterfly.getAppetit());
+        butterfly.butine(flower.getDocs(),flower.x, flower.y);
+    }
+
+
 
     hitEnemy(bullet, enemy) {
         this.updateScore(10);

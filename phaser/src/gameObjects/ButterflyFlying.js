@@ -2,6 +2,8 @@ import ASSETS from '../assets.js';
 
 export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
     health = 1; // enemy health
+    appetit = 100; //butterfly appetit
+    isButine = false; //butterfly appetit
     fireCounterMin = 100; // minimum fire rate
     fireCounterMax = 300; // maximum fire rate
     fireCounter;
@@ -25,7 +27,7 @@ export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
         this.power = power;
         this.fireCounter = Phaser.Math.RND.between(this.fireCounterMin, this.fireCounterMax); // random firing interval
         //this.setFlipY(true); // flip image vertically
-        this.setDepth(10);
+        this.setDepth(70);
         this.scene = scene;
 
         this.initPath(pathId, speed); // choose path to follow
@@ -33,7 +35,7 @@ export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
 
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
-
+        if(this.isButine) return;//stop quand le papillon butine
         if (this.pathIndex > 1) return; // stop updating if reached end of path
 
         this.path.getPoint(this.pathIndex, this.pathVector); // get current coordinate based on percentage moved
@@ -82,6 +84,17 @@ export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
 
     getPower() {
         return this.power;
+    }
+
+    getAppetit() {
+        return this.appetit;
+    }    
+
+    butine(docs,x,y) {
+        this.isButine = true;
+        this.setPosition(x, y);
+        //remplace les couleurs par les images des docs
+        console.log(docs); 
     }
 
     remove() {

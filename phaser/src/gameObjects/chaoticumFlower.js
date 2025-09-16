@@ -65,6 +65,17 @@ export default class chaoticumFlower {
                     return me.docs[1][i] && me.docs[1][i].photo ? "url(#img"+i+")" : color
                 })
                 .attr('transform', d => `rotate(${d})scale(0.5)`);
+
+            //place le thème au centre de la fleur
+            if(me.docs){
+                let theme = svg.append('text')
+                    .attr("text-anchor","middle")
+                    .attr("y",10)
+                    .attr("font-size",20)
+                    .attr("font-family","Arial, Helvetica, sans-serif")
+                    .attr("fill",d3.color(color).darker().darker())
+                    .text(me.docs[0] ? me.docs[0] : "");
+            }
         }            
             
         this.toString = function(){
