@@ -65,6 +65,7 @@ export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
     }
 
     fire() {
+        return false; // butterflies don't shoot
         this.fireCounter = Phaser.Math.RND.between(this.fireCounterMin, this.fireCounterMax);
         this.scene.fireEnemyBullet(this.x, this.y, this.power);
     }
@@ -93,8 +94,34 @@ export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
     butine(docs,x,y) {
         this.isButine = true;
         this.setPosition(x, y);
+        //
+
+        const chain1 = this.scene.tweens.chain({
+            targets: this,
+            tweens: [
+                {
+                    y: y+10,
+                    scaleX: 0.7,
+                    duration: 300,
+                    ease: 'quad.out'
+                },
+                {
+                    y: y-10,
+                    scaleX: 1,
+                    duration: 1000,
+                    ease: 'bounce.out'
+                },
+            ],
+            loop: docs.length,
+            repeatDelay: 300,
+            onComplete: () => this.endButine()
+        });        
         //remplace les couleurs par les images des docs
         console.log(docs); 
+    }
+
+    endButine() {
+        this.isButine = false;
     }
 
     remove() {

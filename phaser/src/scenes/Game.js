@@ -11,6 +11,7 @@ import ButterflyFlying from '../gameObjects/ButterflyFlying.js';
 import FlowerInField from '../gameObjects/FlowerInField.js';
 import EnemyBullet from '../gameObjects/EnemyBullet.js';
 import Explosion from '../gameObjects/Explosion.js';
+import Butinage from '../gameObjects/Butinage.js';
 
 export class Game extends Phaser.Scene {
     constructor() {
@@ -41,7 +42,7 @@ export class Game extends Phaser.Scene {
 
         this.player.update();
         if (this.spawnEnemyCounter > 0) this.spawnEnemyCounter--;
-        else this.addFlyingButterflies();
+        //else this.addFlyingButterflies();
     }
 
     initVariables() {
@@ -102,7 +103,12 @@ export class Game extends Phaser.Scene {
             key: ANIMATION.explosion.key,
             frames: this.anims.generateFrameNumbers(ANIMATION.explosion.texture, ANIMATION.explosion.config),
             frameRate: ANIMATION.explosion.frameRate,
-            repeat: ANIMATION.explosion.repeat
+        });
+        this.anims.create({
+            key: ANIMATION.butinage.key,
+            frames: this.anims.generateFrameNumbers(ANIMATION.butinage.texture, ANIMATION.butinage.config),
+            frameRate: ANIMATION.butinage.frameRate,
+            repeat: ANIMATION.butinage.repeat
         });
     }
 
@@ -301,12 +307,12 @@ export class Game extends Phaser.Scene {
     }
 
     butineFlower(flower, butterfly) {
-        if(flower.isButine()){
-            this.addExplosion(flower.x, flower.y);
+        if(!flower.isButine()){
+            new Butinage(this, flower, butterfly);
+            flower.hit(butterfly.getAppetit());
+            butterfly.butine(flower.getDocs(),flower.x, flower.y);
             return;
         } 
-        flower.hit(butterfly.getAppetit());
-        butterfly.butine(flower.getDocs(),flower.x, flower.y);
     }
 
 

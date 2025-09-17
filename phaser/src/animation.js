@@ -13,6 +13,7 @@ export default {
         key: 'butinage',
         texture: ASSETS.spritesheet.tiles.key,
         frameRate: 10,
-        config: { start: 4, end: 80 },
+        config: { start: 4, end: 8},
+        repeat: 0
     },
 };
