@@ -100,19 +100,21 @@ export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
             targets: this,
             tweens: [
                 {
-                    y: y+10,
-                    scaleX: 0.7,
+                    y: y+1,
+                    scaleX: 0.3,
+                    scale7: 0.3,
                     duration: 300,
                     ease: 'quad.out'
                 },
                 {
-                    y: y-10,
+                    y: y-1,
                     scaleX: 1,
-                    duration: 1000,
+                    scaleY: 1,
+                    duration: 300,
                     ease: 'bounce.out'
                 },
             ],
-            loop: docs.length,
+            loop: docs.length/2,
             repeatDelay: 300,
             onComplete: () => this.endButine()
         });        
