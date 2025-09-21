@@ -34,6 +34,7 @@ export class Game extends Phaser.Scene {
             this.addFlowerImages(step);
         }
         */
+
     }
 
     update() {
@@ -72,7 +73,7 @@ export class Game extends Phaser.Scene {
         this.add.image(this.scale.width-100, 80, ASSETS.svg.logo.key).setDepth(100);
 
         // Create tutorial text
-        this.tutorialText = this.add.text(this.centreX, this.centreY, 'Tap to shoot!', {
+        this.tutorialText = this.add.text(this.centreX, this.centreY, 'Space bar to start', {
             fontFamily: 'Arial Black', fontSize: 42, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'

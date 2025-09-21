@@ -31,9 +31,14 @@ export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
         this.scene = scene;
 
         this.initPath(pathId, speed); // choose path to follow
+
+        this.text = scene.add.text(10, 100, '', { font: '16px Courier', fill: '#020202ff' });
+
     }
 
     preUpdate(time, delta) {
+        //if (this.chain1 && this.chain1.data) this.debugTweenData(this.text, this.chain1.data[0]);
+
         super.preUpdate(time, delta);
         if(this.isButine) return;//stop quand le papillon butine
         if (this.pathIndex > 1) return; // stop updating if reached end of path
@@ -96,7 +101,7 @@ export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
         this.setPosition(x, y);
         //
 
-        const chain1 = this.scene.tweens.chain({
+        this.chain1 = this.scene.tweens.chain({
             targets: this,
             tweens: [
                 {
@@ -114,12 +119,52 @@ export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
                     ease: 'bounce.out'
                 },
             ],
-            loop: docs.length/2,
+            repeat: docs.length/2,
             repeatDelay: 300,
-            onComplete: () => this.endButine()
+            onComplete: () => this.endButine(),
+            onUpdate: tween =>
+            {
+                debugTweenData(this.text, tween.data[0]);
+            }
         });        
         //remplace les couleurs par les images des docs
         console.log(docs); 
+    }
+
+debugTweenData(text, tweenData) {
+        var output = [];
+
+        var TDStates = [
+            'CREATED',
+            'INIT',
+            'DELAY',
+            'OFFSET_DELAY',
+            'PENDING_RENDER',
+            'PLAYING_FORWARD',
+            'PLAYING_BACKWARD',
+            'HOLD_DELAY',
+            'REPEAT_DELAY',
+            'COMPLETE'
+        ];
+
+        output.push(tweenData.key);
+        output.push('--------');
+        output.push('State: ' + TDStates[tweenData.state]);
+        output.push('Start: ' + tweenData.start);
+        output.push('Current: ' + tweenData.current);
+        output.push('End: ' + tweenData.end);
+        output.push('Progress: ' + tweenData.progress);
+        output.push('Elapsed: ' + tweenData.elapsed);
+        output.push('Duration: ' + tweenData.duration);
+        output.push('Total Duration: ' + tweenData.totalDuration);
+        output.push('Delay: ' + tweenData.delay);
+        output.push('Yoyo: ' + tweenData.yoyo);
+        output.push('Hold: ' + tweenData.hold);
+        output.push('Repeat: ' + tweenData.repeat);
+        output.push('Repeat Counter: ' + tweenData.repeatCounter);
+        output.push('Repeat Delay: ' + tweenData.repeatDelay);
+
+        text.setText(output);
     }
 
     endButine() {
@@ -129,4 +174,6 @@ export default class ButterflyFlying extends Phaser.Physics.Arcade.Sprite {
     remove() {
         this.scene.removeEnemy(this);
     }
+
+    
 }
