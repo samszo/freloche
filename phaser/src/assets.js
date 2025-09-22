@@ -9,11 +9,11 @@ export default {
          programmes: {
              key: 'programmes',
              /*
-             url: 'http://localhost/omk_creationsp8/files/bulk_export/programme_de_l_universite_json-20250912-150309.table.json',
+             url: 'http://localhost/omk_creationsp8/files/bulk_export/programme_de_l_universite_json-20250922-135432.table.json',
              sauve:true,
              */
              url: 'assets/programmes.json',
-             args: {scale:1},             
+             args: {'scale':1,'width':100,'height':100},             
          },
     },
     'svg': {

@@ -65,10 +65,10 @@ export class Preloader extends Phaser.Scene {
                                 ASSETS[type][key].themes = themes;
                                 themes.forEach((docs,i) => {
                                     let id = key+i;
-                                    let cf = new chaoticumFlower({'width':100,'height':100,'id':id,'docs':docs}),
+                                    let cf = new chaoticumFlower({'width':ASSETS[type][key].args.width,'height':ASSETS[type][key].args.height,'id':id,'docs':docs}),
                                     blob = new Blob([cf.toString()], { type: 'image/svg+xml' }),
                                     url = URL.createObjectURL(blob);
-                                    this.load['svg'].apply(this.load, [id,url,ASSETS[type][key].args]);                                
+                                    this.load['svg'].apply(this.load, [id,url]);                                
                                 });
                             } 
                             /*recalcule la dimension avec IIIF

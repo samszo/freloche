@@ -75,14 +75,7 @@
          class="hexaInitGrille"
          id="polygon1"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="https://paris8-omekas.s3.nl-ams.scw.cloud/asset/3357c8288a243b55425ef447626129fc2e2ca606.png"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image1" />
+      
     </g>
     <g
        class="gInit"
@@ -94,14 +87,7 @@
          class="hexaInitGrille"
          id="polygon2"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image2" />
+      
     </g>
     <g
        class="gInit"
@@ -113,14 +99,7 @@
          class="hexaInitGrille"
          id="polygon3"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image3" />
+    
     </g>
     <g
        class="gInit"
@@ -132,14 +111,7 @@
          class="hexaInitGrille"
          id="polygon4"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/522880318e0e87c4d19e29bd3773a4c131bc1216.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image4" />
+     
     </g>
     <g
        class="gInit"
@@ -151,14 +123,7 @@
          class="hexaInitGrille"
          id="polygon5"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image5" />
+      
     </g>
     <g
        class="gInit"
@@ -170,14 +135,7 @@
          class="hexaInitGrille"
          id="polygon6"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/85efab29b66ac0c424e999e5efa627b6ae90a286.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image6" />
+      
     </g>
     <g
        class="gInit"
@@ -189,14 +147,7 @@
          class="hexaInitGrille"
          id="polygon7"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image7" />
+      
     </g>
     <g
        class="gInit"
@@ -208,14 +159,7 @@
          class="hexaInitGrille"
          id="polygon8"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image8" />
+      
     </g>
     <g
        class="gInit"
@@ -227,14 +171,7 @@
          class="hexaInitGrille"
          id="polygon9"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/a4502346e55394ac87b84b3dbba9a89f87b8c58a.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image9" />
+      
     </g>
     <g
        class="gOccupe"
@@ -269,14 +206,7 @@
          class="hexaInitGrille"
          id="polygon11"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image11" />
+      
     </g>
     <g
        class="gInit"
@@ -288,14 +218,7 @@
          class="hexaInitGrille"
          id="polygon12"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image12" />
+      
     </g>
     <g
        class="gInit"
@@ -307,14 +230,7 @@
          class="hexaInitGrille"
          id="polygon13"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image13" />
+     
     </g>
     <g
        class="gInit"
@@ -326,14 +242,7 @@
          class="hexaInitGrille"
          id="polygon14"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image14" />
+      
     </g>
     <g
        class="gInit"
@@ -345,14 +254,7 @@
          class="hexaInitGrille"
          id="polygon15"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image15" />
+      
     </g>
     <g
        class="gInit"
@@ -364,14 +266,7 @@
          class="hexaInitGrille"
          id="polygon16"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/ed0a24671657905b1368d0eb91d4f4b9f580d713.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image16" />
+      
     </g>
     <g
        class="gInit"
@@ -383,14 +278,7 @@
          class="hexaInitGrille"
          id="polygon17"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image17" />
+      
     </g>
     <g
        class="gInit"
@@ -402,14 +290,7 @@
          class="hexaInitGrille"
          id="polygon18"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="http://localhost/omk_creationsp8/files/large/3206eb1ca2df2a87c26b7c661dec46bfcba2f61c.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image18" />
+      
     </g>
     <g
        class="gInit"
@@ -421,14 +302,7 @@
          class="hexaInitGrille"
          id="polygon19"
          style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1" />
-      <image
-         href="https://paris8-omekas.s3.nl-ams.scw.cloud/medium/8afc1c693af3fce3f179a0234992bfb02b9684cd.jpg"
-         x="-50"
-         y="-50"
-         height="100"
-         width="100"
-         style="fill:none;stroke:#9d0000;stroke-width:9.81888;stroke-dasharray:none;stroke-opacity:1"
-         id="image19" />
+     
     </g>
   </g>
   <g

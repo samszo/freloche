@@ -2,6 +2,7 @@
 * Asset from: https://kenney.nl/assets/pixel-platformer
 *
 */
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 import ASSETS from '../assets.js';
 import ANIMATION from '../animation.js';
 import Player from '../gameObjects/Player.js';
@@ -43,7 +44,7 @@ export class Game extends Phaser.Scene {
 
         this.player.update();
         if (this.spawnEnemyCounter > 0) this.spawnEnemyCounter--;
-        //else this.addFlyingButterflies();
+        else this.addFlyingButterflies();
     }
 
     initVariables() {
@@ -73,7 +74,7 @@ export class Game extends Phaser.Scene {
         this.add.image(this.scale.width-100, 80, ASSETS.svg.logo.key).setDepth(100);
 
         // Create tutorial text
-        this.tutorialText = this.add.text(this.centreX, this.centreY, 'Space bar to start', {
+        this.tutorialText = this.add.text(this.centreX, this.centreY, 'Press space bar to start', {
             fontFamily: 'Arial Black', fontSize: 42, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
@@ -174,11 +175,14 @@ export class Game extends Phaser.Scene {
     }
     // create flowers
     initFlower() {
-        //ajoute les fleurs
+        //répartition aléatoire des fleurs
         for (let index = 0; index < ASSETS.json.programmes.nb; index++) {
             const flower = new FlowerInField(this, 'programmes',index, Phaser.Math.RND.between(0, this.scale.width), Phaser.Math.RND.between(0, this.scale.height));
             this.flowersGroup.add(flower);
         }
+        //répartition temporelle des fleurs
+        const x = d3.scaleBand([0, this.scale.width]).domain([0,ASSETS.json.programmes.nb]);
+        
     }
 
 
